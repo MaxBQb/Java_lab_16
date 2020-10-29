@@ -9,7 +9,7 @@ public class TableOrder implements IOrder {
     private Customer customer;
 
     // Пункты заказа 
-    private final List<MenuItem> items = new List<MenuItem>();
+    private final List<MenuItem> items = new List<>();
 
     public Customer getCustomer() {
         return customer;
@@ -80,12 +80,8 @@ public class TableOrder implements IOrder {
     }
 
     public MenuItem[] sortedItemsByCostDescending() {
-        List<MenuItem> tmp = new List<MenuItem>();
-        tmp.sort(new java.util.Comparator<MenuItem>() {
-            public int compare(MenuItem o1, MenuItem o2) {
-                return -Double.compare(o1.getCost(), o2.getCost());
-            }
-        });
+        List<MenuItem> tmp = new List<>();
+        tmp.sort((o1, o2) -> -Double.compare(o1.getCost(), o2.getCost()));
         return (MenuItem[]) tmp.toArray();
     }
 
