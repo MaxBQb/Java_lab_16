@@ -1,54 +1,119 @@
-/*
+package app.Classes;
+import app.Interfaces.IOrder;
+import app.Interfaces.OrdersManager;
 
-import java.util.ArrayList;
+public class InternetOrdersManager implements OrdersManager {
 
-public class InternetOrdersManager implements Interfaces.OrdersManager {
-    private ArrayList<Interfaces.IOrder> arrayList = new ArrayList<Interfaces.IOrder>();
+    // Начало списка заказов
+    private QueueNode head;
 
+    // Конец списка заказов
     private QueueNode tail;
 
+    // Размер списка
     private int size;
 
-    public boolean add(Interfaces.IOrder order) {
-        return arrayList.add(order);
+    InternetOrdersManager() {
+        size = 0;
+        head = null;
+        tail = null;
     }
 
-    public Interfaces.IOrder remove() {
-        return arrayList.remove(0);
+    public boolean addOrder(IOrder order) {
+        size++;
+        if (tail == null) {
+            tail = new QueueNode(order);
+            head = tail;
+            return true;
+        }
+        tail.next = new QueueNode(order, tail, null);
+        tail = tail.next;
+        return true;
     }
 
-    public Interfaces.IOrder order;
+    public IOrder removeOrder() {
+        if (head == null)
+            return null;
+        size--;
+        IOrder value = head.value;
+        head = head.next;
+        return value;
+    }
+
+    public IOrder order() {
+        if (head == null)
+            return null;
+        return head.value;
+    }
 
     @Override
     public int itemsQuantity(String itemName) {
-        return 0;
+        int count = 0;
+        QueueNode current = head;
+        while (current != null) {
+            count += current.value.itemQuantity(itemName);
+            current = current.next;
+        }
+        return count;
     }
 
     @Override
-    public int itemsQuantity(MenuItem itemName) {
-        return 0;
+    public int itemsQuantity(MenuItem item) {
+        int count = 0;
+        QueueNode current = head;
+        while (current != null) {
+            count += current.value.itemQuantity(item);
+            current = current.next;
+        }
+        return count;
     }
 
     @Override
-    public Interfaces.IOrder[] getOrders() {
-        return new Interfaces.IOrder[0];
+    public IOrder[] getOrders() {
+        IOrder[] array = new IOrder[size];
+        QueueNode current = head;
+        for (int i = 0; current != null && i < size; i++) {
+            array[i] = current.value;
+            current = current.next;
+        }
+        return array;
     }
 
     @Override
     public int ordersCostSummary() {
-        return 0;
+        int sum = 0;
+        QueueNode current = head;
+        for (int i = 0; current != null && i < size; i++) {
+            sum += current.value.costTotal();
+            current = current.next;
+        }
+        return sum;
     }
 
     @Override
     public int ordersQuantity() {
-        return 0;
+        int count = 0;
+        QueueNode current = head;
+        for (int i = 0; current != null && i < size; i++) {
+            count += current.value.itemsQuantity();
+            current = current.next;
+        }
+        return count;
+    }
+
+    class QueueNode {
+        public QueueNode next;
+        public QueueNode previous;
+        public IOrder value;
+
+        public QueueNode(IOrder value, QueueNode previous, QueueNode next) {
+            this.value = value;
+            this.next = next;
+            this.previous = previous;
+        }
+
+        public QueueNode(IOrder value) {
+            this(value, null, null);
+        }
     }
 }
-
-public class QueueNode {
-    public QueueNode next;
-    public QueueNode previous;
-    public Interfaces.IOrder value;
-
-}
-*/
