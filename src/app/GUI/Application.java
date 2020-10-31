@@ -1,19 +1,28 @@
 package app.GUI;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Application extends JFrame {
+    JLabel greetings = new JLabel("Приветствуем вас в ресторане у Максима и Ильи!", SwingConstants.CENTER);
+    JButton button_table = new JButton("Забронировать столик");
+    JButton button_online = new JButton("Онлайн-заказ");
 
-    Application() {
-        super("Бар");
+    public Application() {
+        super("Ресторан");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(2, 2, 0, 5));
 
+        add(greetings);
+        JPanel grid = new JPanel();
+        grid.add(button_table);
+        grid.add(button_online);
+
+        getContentPane().add(grid);
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
         setVisible(true);
     }
-
-    //Где на вынос или в помещение
 }
 
