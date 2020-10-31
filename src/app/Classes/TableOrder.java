@@ -9,7 +9,12 @@ public class TableOrder implements IOrder {
     private Customer customer;
 
     // Пункты заказа 
-    private final List<MenuItem> items = new List<>();
+    private final List<MenuItem> items;
+
+    TableOrder(Customer customer) {
+        items = new List<>();
+        this.customer = customer;
+    }
 
     public Customer getCustomer() {
         return customer;
