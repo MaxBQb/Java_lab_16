@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Application extends JFrame {
+    public cApplication controller;
     JLabel greetings = new JLabel("Приветствуем вас в ресторане у Максима и Ильи!", SwingConstants.CENTER);
     public JButton button_table = new JButton("Забронировать столик");
     public JButton button_online = new JButton("Онлайн-заказ");
@@ -22,7 +23,7 @@ public class Application extends JFrame {
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        new cApplication(this); // Связь View-Controller
+        controller = new cApplication(this); // Связь View-Controller
         setVisible(true);
     }
 }

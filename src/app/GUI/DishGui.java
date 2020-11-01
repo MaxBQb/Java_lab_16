@@ -10,6 +10,7 @@ public class DishGui extends JFrame {
     public JComboBox jComboBox = new JComboBox();
     public JButton button_ok = new JButton("Ок");
     JPanel jPanel = new JPanel(new GridLayout(1,2));
+    public cDishGui controller;
 
     public DishGui() {
         super("Выбор блюда");
@@ -22,7 +23,7 @@ public class DishGui extends JFrame {
         add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        new cDishGui(this); // Связь View-Controller
+        controller = new cDishGui(this); // Связь View-Controller
         setVisible(true);
     }
 }

@@ -13,6 +13,7 @@ public class LogIn extends JFrame{
     public JTextArea jTextArea_age = new JTextArea(1, 10);
     public JButton button_address = new JButton("Адрес доставки");
     public JButton button_ok = new JButton("OK");
+    public cLogIn controller;
 
     public LogIn() {
         super("Регистрация");
@@ -29,7 +30,7 @@ public class LogIn extends JFrame{
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        new cLogIn(this); // Связь View-Controller
+        controller = new cLogIn(this); // Связь View-Controller
         setVisible(true);
     }
 }

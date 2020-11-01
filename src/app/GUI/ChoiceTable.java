@@ -9,6 +9,7 @@ public class ChoiceTable extends JFrame {
     JLabel jLabel_void = new JLabel("");
     public JButton button_continue = new JButton("Далее");
     public String free_table[] = { "Столик №1","Столик №3", "Столик №10"};
+    public cChoiceTable controller;
 
     public ChoiceTable() {
         super("Выбор столика");
@@ -24,7 +25,7 @@ public class ChoiceTable extends JFrame {
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        new cChoiceTable(this); // Связь View-Controller
+        controller = new cChoiceTable(this); // Связь View-Controller
         setVisible(true);
     }
 }

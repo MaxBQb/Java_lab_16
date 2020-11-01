@@ -13,6 +13,7 @@ public class Order extends JFrame {
     public JButton button_remove = new JButton("Удалить"); //Добавление клиента
     public JButton button_score = new JButton("Счёт");
     JPanel jPanel = new JPanel(new GridLayout(2,2));
+    public cOrder controller;
 
     public Order() {
         super("Корзина");
@@ -31,7 +32,7 @@ public class Order extends JFrame {
         add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        new cOrder(this); // Связь View-Controller
+        controller = new cOrder(this); // Связь View-Controller
         setVisible(true);
     }
 }

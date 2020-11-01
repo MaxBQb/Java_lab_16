@@ -17,6 +17,7 @@ public class AddressGui extends JFrame{
     public JTextArea jTextArea_flat = new JTextArea(1, 10);
     public JLabel jLabel_code = new JLabel("Ваш код доставки: ХХХХ");
     public JButton button_ok = new JButton("OK");
+    public cAddressGui controller;
 
     public AddressGui() {
         super("Адрес доставки");
@@ -45,7 +46,7 @@ public class AddressGui extends JFrame{
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        new cAddressGui(this); // Связь View-Controller
+        controller = new cAddressGui(this); // Связь View-Controller
         setVisible(true);
     }
 }

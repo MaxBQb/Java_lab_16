@@ -15,6 +15,7 @@ public class BorrowPanel extends JFrame {
     JButton button_add = new JButton("Добавить"); //Добавление клиента
     JButton button_search = new JButton("Найти заказ");
     JButton button_remove = new JButton("Удалить");
+    public cBorrowPanel controller;
 
     public BorrowPanel() {
         final JFrame frame = new JFrame("Оформление заказа в ресторане");
@@ -80,7 +81,7 @@ public class BorrowPanel extends JFrame {
         frame.add(west);
         frame.setLocationRelativeTo(null); // отцентрировать окно
         frame.pack();
-        new cBorrowPanel(this); // Связь View-Controller
+        controller = new cBorrowPanel(this); // Связь View-Controller
         frame.setVisible(true);
     }
 

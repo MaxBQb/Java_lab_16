@@ -9,6 +9,7 @@ public class DrinkGui extends JFrame{
     public JButton button_ok = new JButton("Ок");
     public JComboBox jComboBox = new JComboBox();
     JPanel jPanel = new JPanel(new GridLayout(1,2));
+    public cDrinkGui controller;
 
     public DrinkGui() {
         super("Выбор напитка");
@@ -21,7 +22,7 @@ public class DrinkGui extends JFrame{
         add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        new cDrinkGui(this); // Связь View-Controller
+        controller = new cDrinkGui(this); // Связь View-Controller
         setVisible(true);
     }
 }
