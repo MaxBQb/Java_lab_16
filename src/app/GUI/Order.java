@@ -6,30 +6,30 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Order extends JFrame {
-    JLabel lbl_order = new JLabel("Ваш заказ: ");
-    JTextArea jTextArea_order = new JTextArea(3, 20);
+    public JTextArea jTextArea_order = new JTextArea(3, 20);
     JScrollPane scrollBar;
-    JLabel jLabel_void = new JLabel("");
-    JLabel lbl_total = new JLabel("Итого: 0 рублей");
-    JButton button_add = new JButton("Добавить"); //Добавление клиента
-    JButton button_score = new JButton("Счёт");
+    public JLabel lbl_total = new JLabel("Итого: 0 рублей", SwingConstants.CENTER);
+    public JButton button_add = new JButton("Добавить"); //Добавление клиента
+    public JButton button_remove = new JButton("Удалить"); //Добавление клиента
+    public JButton button_score = new JButton("Счёт");
+    JPanel jPanel = new JPanel(new GridLayout(2,2));
 
     public Order() {
         super("Корзина");
-        setLayout(new GridLayout(3, 2, 1, 5));
+        setLayout(new GridLayout(2, 1));
+        setSize(520,340);
 
+        jTextArea_order.setEditable(false);
         scrollBar = new JScrollPane(this.jTextArea_order);
-
-        add(lbl_order);
         add(scrollBar);
 
-        add(jLabel_void);
-        add(lbl_total);
+        jPanel.add(button_remove);
+        jPanel.add(lbl_total);
 
-        add(button_add);
-        add(button_score);
+        jPanel.add(button_add);
+        jPanel.add(button_score);
+        add(jPanel);
 
-        pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
         new cOrder(this); // Связь View-Controller
         setVisible(true);

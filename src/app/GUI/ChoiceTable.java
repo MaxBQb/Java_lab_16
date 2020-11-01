@@ -5,9 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChoiceTable extends JFrame {
-    JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
+    public JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
     JLabel jLabel_void = new JLabel("");
-    JButton button_continue = new JButton("Далее");
+    public JButton button_continue = new JButton("Далее");
 
     public ChoiceTable() {
         super("Выбор столика");
