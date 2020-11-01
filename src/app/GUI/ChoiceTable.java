@@ -8,13 +8,13 @@ public class ChoiceTable extends JFrame {
     public JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
     JLabel jLabel_void = new JLabel("");
     public JButton button_continue = new JButton("Далее");
+    public String free_table[] = { "Столик №1","Столик №3", "Столик №10"};
 
     public ChoiceTable() {
         super("Выбор столика");
         setLayout(new GridLayout(2, 2, 5, 5));
 
         add(jLabel_choice);
-        String free_table[] = { "Столик №1","Столик №3", "Столик №10"};
         JComboBox jComboBox = new JComboBox(free_table);
 
         //jComboBox.setBounds(40,40,90,20);

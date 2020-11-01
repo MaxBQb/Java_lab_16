@@ -1,5 +1,4 @@
 package app;
-
 import app.GUI.*;
 
 class Main {
@@ -10,5 +9,7 @@ class Main {
         new LogIn();
         new AddressGui();
         new Order();
+        new DishGui();
+        new DrinkGui();
     }
 }
