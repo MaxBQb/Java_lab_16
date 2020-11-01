@@ -1,5 +1,6 @@
 package app.GUI;
 
+import app.Controller.cApplication;
 import javax.swing.*;
 import java.awt.*;
 
@@ -22,6 +23,7 @@ public class Application extends JFrame {
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
+        new cApplication(this); // Связь View-Controller
         setVisible(true);
     }
 }

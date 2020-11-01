@@ -1,5 +1,6 @@
 package app.GUI;
 
+import app.Controller.cChoiceTable;
 import javax.swing.*;
 import java.awt.*;
 
@@ -23,6 +24,7 @@ public class ChoiceTable extends JFrame {
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
+        new cChoiceTable(this); // Связь View-Controller
         setVisible(true);
     }
 }

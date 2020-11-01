@@ -1,5 +1,7 @@
 package app.GUI;
 
+import app.Controller.cOrder;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -29,6 +31,7 @@ public class Order extends JFrame {
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
+        new cOrder(this); // Связь View-Controller
         setVisible(true);
     }
 }

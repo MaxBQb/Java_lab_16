@@ -1,5 +1,6 @@
 package app.GUI;
 
+import app.Controller.cAddressGui;
 import javax.swing.*;
 import java.awt.*;
 
@@ -44,6 +45,7 @@ public class AddressGui extends JFrame{
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
+        new cAddressGui(this); // Связь View-Controller
         setVisible(true);
     }
 }

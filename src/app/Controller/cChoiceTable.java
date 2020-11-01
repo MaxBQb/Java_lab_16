@@ -1,8 +1,8 @@
-package app.GUI.Controller;
-import app.GUI.AddressGui;
+package app.Controller;
+import app.GUI.ChoiceTable;
 
-public class cAddressGui {
-    cAddressGui(AddressGui view) {
+public class cChoiceTable {
+    public cChoiceTable(ChoiceTable view) {
         // Тут код для привязки к кнопкам
         // каких-то действий
         // вообще вся динамическая часть окна

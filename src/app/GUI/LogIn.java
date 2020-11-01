@@ -1,5 +1,6 @@
 package app.GUI;
 
+import app.Controller.cLogIn;
 import javax.swing.*;
 import java.awt.*;
 
@@ -28,6 +29,7 @@ public class LogIn extends JFrame{
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
+        new cLogIn(this); // Связь View-Controller
         setVisible(true);
     }
 }

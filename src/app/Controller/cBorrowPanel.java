@@ -1,8 +1,8 @@
-package app.GUI.Controller;
-import app.GUI.Application;
+package app.Controller;
+import app.GUI.BorrowPanel;
 
-public class cApplication {
-    cApplication(Application view) {
+public class cBorrowPanel {
+    public cBorrowPanel(BorrowPanel view) {
         // Тут код для привязки к кнопкам
         // каких-то действий
         // вообще вся динамическая часть окна

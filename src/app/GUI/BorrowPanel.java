@@ -1,5 +1,7 @@
 package app.GUI;
 
+import app.Controller.cBorrowPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -78,7 +80,7 @@ public class BorrowPanel extends JFrame {
         frame.add(west);
         frame.setLocationRelativeTo(null); // отцентрировать окно
         frame.pack();
-
+        new cBorrowPanel(this); // Связь View-Controller
         frame.setVisible(true);
     }
 
