@@ -4,11 +4,11 @@ package app.Classes;
 public class Customer {
 
     // Неизвесный клиент в летах
-    private static final Customer MATURE_UNKNOWN_CUSTOMER = new Customer(
+    public static final Customer MATURE_UNKNOWN_CUSTOMER = new Customer(
             "Неизвесный", "покупатель", 100, Address.EMPTY_ADDRESS);
 
     // Неизвесный молодой клиент
-    private static final Customer NOT_MATURE_UNKNOWN_CUSTOMER = new Customer(
+    public static final Customer NOT_MATURE_UNKNOWN_CUSTOMER = new Customer(
             "Неизвесный", "покупатель", 0, Address.EMPTY_ADDRESS);
 
     // Имя
