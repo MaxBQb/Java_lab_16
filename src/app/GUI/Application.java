@@ -1,5 +1,4 @@
 package app.GUI;
-
 import app.Controller.cApplication;
 import javax.swing.*;
 import java.awt.*;

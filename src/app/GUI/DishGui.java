@@ -6,22 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DishGui extends JFrame {
-    JLabel jLabel_dishes = new JLabel("Блюдо:", SwingConstants.CENTER);
     JLabel jLabel_void = new JLabel("");
+    public JComboBox jComboBox = new JComboBox();
     public JButton button_ok = new JButton("Ок");
-    public String free_table[] = { "Блюдо №1","Блюдо №2", "Блюдо №3"};
+    JPanel jPanel = new JPanel(new GridLayout(1,2));
 
     public DishGui() {
         super("Выбор блюда");
-        setLayout(new GridLayout(2, 2, 5, 5));
+        setLayout(new GridLayout(2, 1));
         setSize(800,200);
 
-        add(jLabel_dishes);
-        JComboBox jComboBox = new JComboBox(free_table);
-
         add(jComboBox);
-        add(jLabel_void);
-        add(button_ok);
+        jPanel.add(jLabel_void);
+        jPanel.add(button_ok);
+        add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
         new cDishGui(this); // Связь View-Controller

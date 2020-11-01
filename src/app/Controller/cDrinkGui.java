@@ -1,10 +1,16 @@
 package app.Controller;
+import app.Classes.ItemsRepository;
 import app.GUI.DrinkGui;
 
 public class cDrinkGui {
     public cDrinkGui(DrinkGui view) {
-        // Тут код для привязки к кнопкам
-        // каких-то действий
-        // вообще вся динамическая часть окна
+        for (int i = 0; i < ItemsRepository.drinksLength(); i++) {
+            view.jComboBox.addItem((ItemsRepository.getDrink(i)).toString());
+        }
+
+        view.button_ok.addActionListener(e -> {
+            //добавить добавление в заказ ору
+            view.setVisible(false);
+        });
     }
 }

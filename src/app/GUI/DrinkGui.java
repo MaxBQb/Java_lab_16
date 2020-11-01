@@ -5,22 +5,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DrinkGui extends JFrame{
-    JLabel jLabel_dishes = new JLabel("Напиток:", SwingConstants.CENTER);
     public JLabel jLabel_eight_control = new JLabel("Вам нет 18! Алкогольные напитки запрещены законом РФ", SwingConstants.CENTER);
     public JButton button_ok = new JButton("Ок");
-    public String free_table[] = { "Напиток №1","Напиток №2", "Напиток №3"};
+    public JComboBox jComboBox = new JComboBox();
+    JPanel jPanel = new JPanel(new GridLayout(1,2));
 
     public DrinkGui() {
         super("Выбор напитка");
-        setLayout(new GridLayout(2, 2, 5, 5));
+        setLayout(new GridLayout(2, 1));
         setSize(800,200);
 
-        add(jLabel_dishes);
-        JComboBox jComboBox = new JComboBox(free_table);
-
         add(jComboBox);
-        add(jLabel_eight_control);
-        add(button_ok);
+        jPanel.add(jLabel_eight_control);
+        jPanel.add(button_ok);
+        add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
         new cDrinkGui(this); // Связь View-Controller
