@@ -15,7 +15,7 @@ public class DishGui extends JFrame {
     public DishGui() {
         super("Выбор блюда");
         setLayout(new GridLayout(2, 1));
-        setSize(800,200);
+        setSize(1400,200);
 
         add(jComboBox);
         jPanel.add(jLabel_void);

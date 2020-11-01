@@ -14,7 +14,7 @@ public class DrinkGui extends JFrame{
     public DrinkGui() {
         super("Выбор напитка");
         setLayout(new GridLayout(2, 1));
-        setSize(800,200);
+        setSize(1400,200);
 
         add(jComboBox);
         jPanel.add(jLabel_eight_control);
