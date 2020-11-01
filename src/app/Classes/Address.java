@@ -24,9 +24,9 @@ public final class Address {
     // Номер квартиры
     private final int apartmentNumber;
 
-    Address(String cityName, int zipCode,
-            String streetName, int buildingNumber,
-            char buildingLetter, int apartmentNumber) {
+    public Address(String cityName, int zipCode,
+                   String streetName, int buildingNumber,
+                   char buildingLetter, int apartmentNumber) {
         this.cityName = cityName;
         this.streetName = streetName;
         this.buildingNumber = buildingNumber;
