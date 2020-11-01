@@ -12,7 +12,7 @@ public class MenuItem {
     // описание пункта заказа
     private final String description;
 
-    MenuItem(double cost, String name, String description) {
+    public MenuItem(double cost, String name, String description) {
         this.cost = cost;
         this.name = name;
         this.description = description;

@@ -9,7 +9,7 @@ public class TableOrdersManager implements OrdersManager {
     // Список заказов 1 заказ на 1 столик
     private final List<IOrder> orders;
 
-    TableOrdersManager(int size) {
+    public TableOrdersManager(int size) {
         orders = new List(size, true);
     }
 

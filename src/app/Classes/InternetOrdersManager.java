@@ -13,7 +13,7 @@ public class InternetOrdersManager implements OrdersManager {
     // Размер списка
     private int size;
 
-    InternetOrdersManager() {
+    public InternetOrdersManager() {
         size = 0;
         head = null;
         tail = null;

@@ -12,11 +12,11 @@ public final class Drink extends MenuItem implements Alcoholable {
     // Тип напитка
     private final DrinkTypeEnum type;
 
-    Drink(String name, String description, DrinkTypeEnum type) throws IllegalTableNumber {
+    public Drink(String name, String description, DrinkTypeEnum type) throws IllegalTableNumber {
         this(0, name, description, 0, type);
     }
 
-    Drink(double cost,
+    public Drink(double cost,
           String name,
           String description,
           double alcoholVol,

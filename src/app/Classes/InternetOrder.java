@@ -30,7 +30,7 @@ public class InternetOrder implements IOrder {
         }
     }
 
-    InternetOrder(Customer customer) {
+    public InternetOrder(Customer customer) {
         size = 0;
         head = null;
         tail = null;

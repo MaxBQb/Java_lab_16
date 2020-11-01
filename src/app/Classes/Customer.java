@@ -23,7 +23,7 @@ public class Customer {
     // Адрес доставки
     private final Address address;
 
-    Customer(String firstName, String secondName, int age, Address address) {
+    public Customer(String firstName, String secondName, int age, Address address) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.age = age;

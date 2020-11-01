@@ -11,7 +11,7 @@ public class TableOrder implements IOrder {
     // Пункты заказа 
     private final List<MenuItem> items;
 
-    TableOrder(Customer customer) {
+    public TableOrder(Customer customer) {
         items = new List<>();
         this.customer = customer;
     }

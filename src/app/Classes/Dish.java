@@ -5,11 +5,11 @@ import app.Exceptions.IllegalTableNumber;
 // ОН ГОТОВ НЕ ТРОГАТЬ
 public final class Dish extends MenuItem {
 
-    Dish(String name, String description) throws IllegalTableNumber {
+    public Dish(String name, String description) throws IllegalTableNumber {
         this(0, name, description);
     }
 
-    Dish(double cost, String name, String description) throws IllegalArgumentException {
+    public Dish(double cost, String name, String description) throws IllegalArgumentException {
         super(cost, name, description);
         if (super.getCost() < 0 || super.getName() == null ||
                 super.getName().isBlank() || super.getName() == null ||
