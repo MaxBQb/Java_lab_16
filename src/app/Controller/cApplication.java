@@ -20,7 +20,7 @@ public class cApplication {
             if (login_panel != null &&
                 login_panel.isVisible()
             ) return;
-            login_panel = new LogIn();
+            login_panel = new LogIn(true);
         });
     }
 }

@@ -1,5 +1,6 @@
 package app.GUI;
 
+import app.Classes.Customer;
 import app.Controller.cOrder;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ public class Order extends JFrame {
     JPanel jPanel = new JPanel(new GridLayout(2,2));
     public cOrder controller;
 
-    public Order() {
+    public Order(Customer client) {
         super("Корзина");
         setLayout(new GridLayout(2, 1));
         setSize(520,340);
@@ -34,5 +35,9 @@ public class Order extends JFrame {
         setLocationRelativeTo(null); // отцентрировать окно
         controller = new cOrder(this); // Связь View-Controller
         setVisible(true);
+    }
+
+    public Order() {
+        this(Customer.MATURE_UNKNOWN_CUSTOMER);
     }
 }

@@ -1,7 +1,7 @@
 package app.Controller;
 import app.Classes.Address;
 import app.Controller.Validators.hasContent;
-import app.Controller.Validators.isNatural;
+import app.Controller.Validators.isNumber;
 import app.GUI.AddressGui;
 
 import javax.swing.*;
@@ -10,15 +10,14 @@ public class cAddressGui {
     private Address current_address;
 
     public cAddressGui(AddressGui view) {
-        current_address = Address.EMPTY_ADDRESS;
         int zipCode = (int)(Math.random()*10000);
         view.jLabel_code.setText(
                 view.jLabel_code.getText().replace(
                         "ХХХХ",
                         ""+zipCode
                 ));
-        view.jTextArea_flat.setInputVerifier(new isNatural());
-        view.jTextArea_house.setInputVerifier(new isNatural());
+        view.jTextArea_flat.setInputVerifier(new isNumber());
+        view.jTextArea_house.setInputVerifier(new isNumber());
         view.jTextArea_street.setInputVerifier(new hasContent());
         view.jTextArea_city.setInputVerifier(new hasContent());
         view.jTextArea_building.setInputVerifier(new InputVerifier() {
