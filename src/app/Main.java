@@ -9,5 +9,6 @@ class Main {
         new ChoiceTable();
         new LogIn();
         new AddressGui();
+        new Order();
     }
 }
