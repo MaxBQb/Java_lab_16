@@ -12,8 +12,13 @@ public class List<E> {
         if (initialCapacity < 0)
             throw new IllegalArgumentException("Illegal Capacity: " +
                     initialCapacity);
-        this.elementData = new Object[initialCapacity];
+        elementData = new Object[initialCapacity];
         this.fixed_size = fixed_size;
+        if (fixed_size) {
+            for (int i = 0; i < initialCapacity; i++)
+                elementData[i] = null;
+            size = initialCapacity;
+        }
     }
 
     public List(int initialCapacity) {
