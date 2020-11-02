@@ -4,6 +4,8 @@ import app.GUI.Application;
 import app.GUI.ChoiceTable;
 import app.GUI.LogIn;
 
+import javax.swing.*;
+
 public class cApplication {
     private ChoiceTable choiceTable_panel;
     private LogIn login_panel;
@@ -13,6 +15,15 @@ public class cApplication {
             if (choiceTable_panel != null &&
                 choiceTable_panel.isVisible()
             ) return;
+            if (cOrder.getTableOrdersManager().freeTableNumber() == -1) {
+                JOptionPane.showMessageDialog(null,
+                        "Сейчас все столики заняты, попробуйте обратиться позже.\n" +
+                                "Или сделайте заказ онлайн.",
+                        "Ошибка!",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
             choiceTable_panel = new ChoiceTable();
         });
 

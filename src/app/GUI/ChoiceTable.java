@@ -5,10 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ChoiceTable extends JFrame {
-    public JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
+    JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
     JLabel jLabel_void = new JLabel("");
     public JButton button_continue = new JButton("Далее");
-    public String free_table[] = { "Столик №1","Столик №3", "Столик №10"};
+    public JComboBox jComboBox = new JComboBox();
     public cChoiceTable controller;
 
     public ChoiceTable() {
@@ -16,7 +16,6 @@ public class ChoiceTable extends JFrame {
         setLayout(new GridLayout(2, 2, 5, 5));
 
         add(jLabel_choice);
-        JComboBox jComboBox = new JComboBox(free_table);
 
         //jComboBox.setBounds(40,40,90,20);
         add(jComboBox);

@@ -13,7 +13,7 @@ import javax.swing.*;
 public class cLogIn {
     private AddressGui get_address_panel;
 
-    public cLogIn(LogIn view, boolean online) {
+    public cLogIn(LogIn view, boolean online, int table) {
         view.button_address.setVisible(online);
         view.jTextArea_age.setInputVerifier(new isNumber(1, 120));
         view.jTextArea_name.setInputVerifier(new hasContent());
@@ -49,7 +49,7 @@ public class cLogIn {
                     get_address_panel.dispose();
                     new Order(new Customer(name, surname, age, get_address_panel.controller.getAddress()));
                 } else
-                    new Order(new Customer(name, surname, age, Address.EMPTY_ADDRESS));
+                    new Order(new Customer(name, surname, age, Address.EMPTY_ADDRESS), table);
             } catch (Throwable ignore) {
                 return;
             }

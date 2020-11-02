@@ -15,8 +15,9 @@ public class LogIn extends JFrame{
     public JButton button_ok = new JButton("OK");
     public cLogIn controller;
 
-    public LogIn(boolean online) {
+    public LogIn(boolean online, int table) {
         super("Регистрация");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(4, 2, 1, 5));
 
         add(jLabel_name);
@@ -30,11 +31,15 @@ public class LogIn extends JFrame{
 
         pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cLogIn(this, online); // Связь View-Controller
+        controller = new cLogIn(this, online, table); // Связь View-Controller
         setVisible(true);
     }
 
+    public LogIn(boolean online) {
+        this(online, -1);
+    }
+
     public LogIn() {
-        this(false);
+        this(true);
     }
 }

@@ -16,7 +16,7 @@ public class Order extends JFrame {
     JPanel jPanel = new JPanel(new GridLayout(2,2));
     public cOrder controller;
 
-    public Order(Customer client) {
+    public Order(Customer client, int table) {
         super("Корзина");
         setLayout(new GridLayout(2, 1));
         setSize(520,340);
@@ -33,11 +33,21 @@ public class Order extends JFrame {
         add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cOrder(this); // Связь View-Controller
-        setVisible(true);
+        controller = new cOrder(this, client, table); // Связь View-Controller
+    }
+
+    public Order(Customer client) {
+        this(client, -1);
     }
 
     public Order() {
         this(Customer.MATURE_UNKNOWN_CUSTOMER);
+    }
+
+    @Override
+    public void dispose() {
+        if (controller != null)
+            controller.dispose();
+        super.dispose();
     }
 }
