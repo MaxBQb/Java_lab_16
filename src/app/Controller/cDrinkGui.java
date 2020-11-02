@@ -11,7 +11,9 @@ public class cDrinkGui {
 
         view.button_ok.addActionListener(e -> {
             iOrder.add(ItemsRepository.getDrink(view.jComboBox.getSelectedIndex()));
-            view.setVisible(false);
+            if (order_panel != null)
+                order_panel.updateOrderList();
+            view.dispose();
         });
     }
 }

@@ -12,7 +12,8 @@ public class cDishGui {
 
         view.button_ok.addActionListener(e -> {
             iOrder.add(ItemsRepository.getDish(view.jComboBox.getSelectedIndex()));
-            order_panel.updateOrderList();
+            if (order_panel != null)
+                order_panel.updateOrderList();
             view.dispose();
         });
     }
