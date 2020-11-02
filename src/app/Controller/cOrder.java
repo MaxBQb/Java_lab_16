@@ -16,9 +16,11 @@ public class cOrder {
     private IOrder current_order;
     private OrdersManager current_orders_manager;
     private boolean must_dispose;
+    private Order view;
 
     public cOrder(Order view, Customer client, int table) {
         this.table = table;
+        this.view = view;
         must_dispose = true;
 
         if (table == -1) {
@@ -50,7 +52,9 @@ public class cOrder {
                     return;
             }
         });
+        view.button_remove.addActionListener(e -> {
 
+        });
 
         if (table != -1) {
             boolean table_occupied = true;
@@ -87,7 +91,9 @@ public class cOrder {
     }
 
     public void updateOrderList() {
-
+        view.jTextArea_order.setText("");
+        for (String name: current_order.itemsNames())
+            view.jTextArea_order.append(name+"\n");
     }
 
     public static TableOrdersManager getTableOrdersManager() {
