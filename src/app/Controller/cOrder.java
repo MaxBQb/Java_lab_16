@@ -53,7 +53,53 @@ public class cOrder {
             }
         });
         view.button_remove.addActionListener(e -> {
+            MenuItem[] items = current_order.getItems();
+            if (items.length == 0) {
+                JOptionPane.showMessageDialog(view,
+                    "Вы, пока ещё, ничего не заказали!",
+                    "Ошибка!",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
 
+            String name = JOptionPane.showInputDialog(view,
+                    "Введите название удаляемой позиции: ",
+                            items[0].getName()
+            );
+            if (!current_order.remove(name))
+                JOptionPane.showMessageDialog(view,
+                        "Ничего не найдено!",
+                        "Ошибка!",
+                        JOptionPane.WARNING_MESSAGE
+                );
+            updateOrderList();
+        });
+        view.button_score.addActionListener(e -> {
+            if (current_order.itemsQuantity() == 0) {
+                JOptionPane.showMessageDialog(view,
+                        "Вы, пока ещё, ничего не заказали!",
+                        "Ошибка!",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            if (JOptionPane.showConfirmDialog(view,
+                    "Вы уверены, что хотите закрыть заказ?",
+                    "Выберите вариант:",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION)
+                return;
+
+            view.button_score.setEnabled(false);
+            view.button_add.setEnabled(false);
+            view.button_remove.setEnabled(false);
+            if (table == -1) {
+                internetOrdersManager.addOrder(current_order);
+            } else {
+                tableOrdersManager.remove(table);
+                tableOrdersManager.add(current_order, table);
+            }
         });
 
         if (table != -1) {
@@ -68,7 +114,7 @@ public class cOrder {
             if (table_occupied) {
                 must_dispose = false;
                 view.dispose();
-                JOptionPane.showMessageDialog(null,
+                JOptionPane.showMessageDialog(view,
                         "К сожалению, этот столик недавно заняли!",
                         "Ошибка!",
                         JOptionPane.WARNING_MESSAGE
@@ -86,7 +132,9 @@ public class cOrder {
     }
 
     public void dispose() {
-        if (table != -1 && must_dispose)
+        if (!must_dispose)
+            return;
+        if (table != -1)
             tableOrdersManager.remove(table);
     }
 
@@ -94,6 +142,7 @@ public class cOrder {
         view.jTextArea_order.setText("");
         for (String name: current_order.itemsNames())
             view.jTextArea_order.append(name+"\n");
+        view.lbl_total.setText("Итого: "+current_order.costTotal()+" руб.");
     }
 
     public static TableOrdersManager getTableOrdersManager() {

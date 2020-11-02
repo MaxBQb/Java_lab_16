@@ -9,7 +9,7 @@ import java.awt.*;
 public class Order extends JFrame {
     public JTextArea jTextArea_order = new JTextArea(3, 20);
     JScrollPane scrollBar;
-    public JLabel lbl_total = new JLabel("Итого: 0 рублей", SwingConstants.CENTER);
+    public JLabel lbl_total = new JLabel("Итого: 0 руб.", SwingConstants.CENTER);
     public JButton button_add = new JButton("Добавить"); //Добавление клиента
     public JButton button_remove = new JButton("Удалить"); //Добавление клиента
     public JButton button_score = new JButton("Счёт");
@@ -18,6 +18,7 @@ public class Order extends JFrame {
 
     public Order(Customer client, int table) {
         super("Корзина");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(2, 1));
         setSize(520,340);
 
