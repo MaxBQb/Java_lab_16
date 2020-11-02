@@ -14,10 +14,12 @@ public class TableOrdersManager implements OrdersManager {
     }
 
     public void add(IOrder order, int tableNumber) {
+        tableNumber--;
         orders.set(tableNumber, order);
     }
 
     public void addItem(MenuItem item, int tableNumber) {
+        tableNumber--;
         if (orders.get(tableNumber) == null)
             throw new RuntimeException("Столик свободен, невозможно добавить пункт заказа");
         orders.get(tableNumber).add(item);
@@ -26,24 +28,28 @@ public class TableOrdersManager implements OrdersManager {
     public int freeTableNumber() {
         for (int i = 0; i < orders.size(); i++)
             if (orders.get(i) == null)
-                return i;
+                return i+1;
         return -1;
     }
 
     public Integer[] freeTableNumbers() {
-        List<Integer> countTable = new List<Integer>();
+        int count = 0;
         for (int i = 0; i < orders.size(); i++)
             if (orders.get(i) == null)
-                countTable.add(i);
-        return (Integer[]) countTable.toArray();
+                count++;
+        Integer[] countTable = new Integer[count];
+        for (int i = 0; i < orders.size(); i++)
+            if (orders.get(i) == null)
+                countTable[--count] = i+1;
+        return countTable;
     }
 
     public IOrder getOrder(int tableNumber) {
-        return orders.get(tableNumber);
+        return orders.get(tableNumber-1);
     }
 
     public void remove(int tableNumber) {
-        orders.remove(tableNumber);
+        orders.remove(tableNumber-1);
     }
 
     public int remove(IOrder order) {
