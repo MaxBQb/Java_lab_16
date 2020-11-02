@@ -14,6 +14,7 @@ public class ChoiceTable extends JFrame {
     public ChoiceTable() {
         super("Выбор столика");
         setLayout(new GridLayout(2, 2, 5, 5));
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         add(jLabel_choice);
 

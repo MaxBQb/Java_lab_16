@@ -75,6 +75,7 @@ public class cOrder {
                 );
             updateOrderList();
         });
+
         view.button_score.addActionListener(e -> {
             if (current_order.itemsQuantity() == 0) {
                 JOptionPane.showMessageDialog(view,
@@ -94,12 +95,16 @@ public class cOrder {
             view.button_score.setEnabled(false);
             view.button_add.setEnabled(false);
             view.button_remove.setEnabled(false);
+
             if (table == -1) {
                 internetOrdersManager.addOrder(current_order);
             } else {
                 tableOrdersManager.remove(table);
                 tableOrdersManager.add(current_order, table);
             }
+
+            if (cApplication.borrowPanel != null && cApplication.borrowPanel.controller != null)
+                cApplication.borrowPanel.controller.updateOrdersList();
         });
 
         if (table != -1) {
@@ -134,8 +139,11 @@ public class cOrder {
     public void dispose() {
         if (!must_dispose)
             return;
-        if (table != -1)
+        if (table != -1) {
             tableOrdersManager.remove(table);
+            if (cApplication.borrowPanel != null && cApplication.borrowPanel.controller != null)
+                cApplication.borrowPanel.controller.updateOrdersList();
+        }
     }
 
     public void updateOrderList() {

@@ -28,6 +28,7 @@ public final class Address {
                    String streetName, int buildingNumber,
                    char buildingLetter, int apartmentNumber) {
         this.cityName = cityName;
+        this.zipCode = zipCode;
         this.streetName = streetName;
         this.buildingNumber = buildingNumber;
         this.buildingLetter = buildingLetter;

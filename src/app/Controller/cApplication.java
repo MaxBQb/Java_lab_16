@@ -14,13 +14,21 @@ import javax.swing.*;
 public class cApplication {
     private ChoiceTable choiceTable_panel;
     private LogIn login_panel;
-    private static BorrowPanel borrowPanel;
+    public static BorrowPanel borrowPanel;
 
     private static Timer timer = new Timer();
 
     public cApplication(Application view) {
 
         view.button_table.addActionListener(e -> {
+            if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == 1) {
+                if (borrowPanel != null &&
+                        borrowPanel.isVisible()
+                ) return;
+                borrowPanel = new BorrowPanel();
+                return;
+            }
+
             if (choiceTable_panel != null &&
                 choiceTable_panel.isVisible())
                 return;
@@ -42,7 +50,7 @@ public class cApplication {
                 if (borrowPanel != null &&
                         borrowPanel.isVisible()
                 ) return;
-                borrowPanel = new BorrowPanel();
+                borrowPanel = new BorrowPanel(true);
                 return;
             }
             if (login_panel != null &&
@@ -55,8 +63,10 @@ public class cApplication {
               @Override
               public void run() {
                   cOrder.getInternetOrdersManager().removeOrder();
+                  if (cApplication.borrowPanel != null && cApplication.borrowPanel.controller != null)
+                      cApplication.borrowPanel.controller.updateOrdersList();
               }
-          }, 0, 1000 * 60
+          }, 0, 1000 * 60 * 60
         );
     }
 }

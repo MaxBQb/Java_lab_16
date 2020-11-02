@@ -90,8 +90,10 @@ public class TableOrdersManager implements OrdersManager {
 
     public int ordersCostSummary() {
         int sum = 0;
-        for (int i = 0; i < orders.size(); i++)
-            sum += orders.get(i).costTotal();
+        for (int i = 0; i < orders.size(); i++) {
+            if (orders.get(i) != null)
+                sum += orders.get(i).costTotal();
+        }
         return sum;
     }
 

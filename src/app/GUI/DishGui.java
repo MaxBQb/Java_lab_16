@@ -20,6 +20,7 @@ public class DishGui extends JFrame {
         super("Выбор блюда");
         setLayout(new GridLayout(2, 1));
         setSize(1400,200);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         add(jComboBox);
         jPanel.add(jLabel_void);

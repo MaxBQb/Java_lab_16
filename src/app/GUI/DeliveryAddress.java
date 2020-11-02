@@ -1,10 +1,12 @@
 package app.GUI;
 
-import app.Controller.cAddressGui;
+import app.Classes.Customer;
+import app.Controller.cDeliveryAddress;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class AddressGui extends JFrame{
+public class DeliveryAddress extends JFrame {
     JLabel jLabel_city = new JLabel("Название города: ", SwingConstants.CENTER);
     public JTextArea jTextArea_city  = new JTextArea(1, 10);
     JLabel jLabel_street = new JLabel("Название улицы: ", SwingConstants.CENTER);
@@ -15,39 +17,49 @@ public class AddressGui extends JFrame{
     public JTextArea jTextArea_building  = new JTextArea(1, 10);
     JLabel jLabel_flat = new JLabel("Квартира: ", SwingConstants.CENTER);
     public JTextArea jTextArea_flat = new JTextArea(1, 10);
-    public JLabel jLabel_code = new JLabel("Ваш код доставки: ХХХХ");
+    JLabel jLabel_void = new JLabel("");
     public JButton button_ok = new JButton("OK");
-    public cAddressGui controller;
-
-    public AddressGui() {
+    public cDeliveryAddress controller;
+    public DeliveryAddress(Customer client) {
         super("Адрес доставки");
+        setSize(400,300);
+        setMinimumSize(new Dimension(400,300));
         setLayout(new GridLayout(6, 2, 1, 5));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         add(jLabel_city);
+        jTextArea_city.setEditable(false);
         add(jTextArea_city);
 
         add(jLabel_street);
+        jTextArea_street.setEditable(false);
         add(jTextArea_street);
 
         add(jLabel_house);
+        jTextArea_house.setEditable(false);
         add(jTextArea_house);
 
         add(jLabel_building);
+        jTextArea_building.setEditable(false);
         add(jTextArea_building);
 
         add(jLabel_building);
+        jTextArea_building.setEditable(false);
         add(jTextArea_building);
 
         add(jLabel_flat);
+        jTextArea_flat.setEditable(false);
         add(jTextArea_flat);
 
-        add(jLabel_code);
+        add(jLabel_void);
         add(button_ok);
-
-        pack(); // Уважать окно
         setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cAddressGui(this); // Связь View-Controller
+
+        controller = new cDeliveryAddress(this, client); // Связь View-Controller
         setVisible(true);
+    }
+
+    public DeliveryAddress() {
+        this(Customer.MATURE_UNKNOWN_CUSTOMER);
     }
 }

@@ -6,62 +6,21 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BorrowPanel extends JFrame {
-    JLabel lbl_occupation_info = new JLabel("Список занятых столиков: ");
-    JLabel lbl_send_order = new JLabel("Заказ выбранного столика: ");
-    JTextArea info_list = new JTextArea(3, 20);
-    JTextArea orders_list = new JTextArea(3, 20);
-    JScrollPane scrollBar;
-
-    JButton button_add = new JButton("Добавить"); //Добавление клиента
-    JButton button_search = new JButton("Найти заказ");
-    JButton button_remove = new JButton("Удалить");
+    public DefaultListModel defaultListModel = new DefaultListModel();
+    public JList jList = new JList(defaultListModel);
+    public JButton button_add = new JButton("Перейти к заказу"); //Добавление клиента
+    public JButton button_remove = new JButton("Удалить заказ");
+    public JButton button_sum = new JButton("Суммарная прибыль");
     public cBorrowPanel controller;
 
-    public BorrowPanel() {
-        final JFrame frame = new JFrame("Оформление заказа в ресторане");
-        //frame.setSize(900,600);
-        //setLayout(new GridBagLayout());
-
-        scrollBar = new JScrollPane(this.info_list);
-
-/*
-        button_add.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this,
-                    "Ничего не найдено!",
-                    "Результаты поиска",
-                    JOptionPane.QUESTION_MESSAGE
-            );
-        });
-
-        button_add.setSize(1,1);
-        button_add.setPreferredSize(new Dimension( 1, 1));
-        button_add.setMaximumSize(new Dimension(1,1));
-        button_add.setMinimumSize(new Dimension(1,1));
-        add(button_add);
-
-        button_search.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this,
-                    "Ничего не найдено!",
-                    "Результаты поиска",
-                    JOptionPane.QUESTION_MESSAGE
-            );
-        });
-        add(button_search);
-
-        button_remove.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this,
-                    "Ничего не найдено!",
-                    "Результаты поиска",
-                    JOptionPane.QUESTION_MESSAGE
-            );
-        });
-        add(button_remove);
-*/
+    public BorrowPanel(boolean online) {
+        super("Menu");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1));
         buttonPanel.add(button_add);
-        buttonPanel.add(button_search);
         buttonPanel.add(button_remove);
+        buttonPanel.add(button_sum);
 
         JPanel east = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -69,28 +28,19 @@ public class BorrowPanel extends JFrame {
         gbc.weighty = 1; //Указывает, как распределить дополнительное вертикальное пространство
         east.add(buttonPanel, gbc);
 
+        add(east, BorderLayout.EAST);
 
-        JPanel west = new JPanel(new GridLayout(2, 2, 0, 10));
-        west.add(lbl_occupation_info);
-        west.add(scrollBar);
-        west.add(lbl_send_order );
-        west.add(orders_list );
-        west.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        add(new JScrollPane(jList));
+        pack();
+        setLocationRelativeTo(null); // отцентрировать окно
 
-        frame.add(east, BorderLayout.EAST);
-        frame.add(west);
-        frame.pack();
-        frame.setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cBorrowPanel(this); // Связь View-Controller
-        frame.setVisible(true);
+        controller = new cBorrowPanel(this, online); // Связь View-Controller
+        setVisible(true);
     }
 
+    public BorrowPanel() {
+        this(false);
+    }
 }
-/*
-{
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(200, 200);
-            }
-        };
- */
+
