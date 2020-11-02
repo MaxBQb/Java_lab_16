@@ -82,7 +82,10 @@ public class TableOrdersManager implements OrdersManager {
     }
 
     public IOrder[] getOrders() {
-        return (IOrder[]) orders.toArray();
+        IOrder[] tmp = new IOrder[orders.size()];
+        for (int i = 0; i < orders.size(); i++)
+            tmp[i] = orders.get(i);
+        return tmp;
     }
 
     public int ordersCostSummary() {

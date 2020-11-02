@@ -79,8 +79,8 @@ public class BorrowPanel extends JFrame {
 
         frame.add(east, BorderLayout.EAST);
         frame.add(west);
-        frame.setLocationRelativeTo(null); // отцентрировать окно
         frame.pack();
+        frame.setLocationRelativeTo(null); // отцентрировать окно
         controller = new cBorrowPanel(this); // Связь View-Controller
         frame.setVisible(true);
     }

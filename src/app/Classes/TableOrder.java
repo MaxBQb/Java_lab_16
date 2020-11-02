@@ -57,7 +57,10 @@ public class TableOrder implements IOrder {
     }
 
     public MenuItem[] getItems() {
-        return (MenuItem[]) items.toArray();
+        MenuItem[] tmp2 = new MenuItem[items.size()];
+        for (int i = 0; i < items.size(); i++)
+            tmp2[i] = items.get(i);
+        return tmp2;
     }
 
     public boolean remove(String itemName) {
@@ -87,7 +90,10 @@ public class TableOrder implements IOrder {
     public MenuItem[] sortedItemsByCostDescending() {
         List<MenuItem> tmp = new List<>();
         tmp.sort((o1, o2) -> -Double.compare(o1.getCost(), o2.getCost()));
-        return (MenuItem[]) tmp.toArray();
+        MenuItem[] tmp2 = new MenuItem[tmp.size()];
+        for (int i = 0; i < tmp.size(); i++)
+            tmp2[i] = tmp.get(i);
+        return tmp2;
     }
 
     public int costTotal() {
