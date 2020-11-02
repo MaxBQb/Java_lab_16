@@ -46,6 +46,6 @@ public final class Drink extends MenuItem implements Alcoholable {
         return "Название: " + super.getName() + ", " +
                 "цена: " + super.getCost() + "₽, " +
                 (!super.getDescription().equals("") ? "описание: " + super.getDescription() : "") +
-                "напиток: " + type + ", " + "объем: " + alcoholVol + "";
+                "Напиток: " + type + ", " + "Содержание алкоголя в одном литре: " + alcoholVol + "";
     }
 }
