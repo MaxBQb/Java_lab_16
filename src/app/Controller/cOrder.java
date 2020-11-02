@@ -18,24 +18,24 @@ public class cOrder {
         this.table = table;
         must_dispose = true;
 
-        boolean table_occupied = true;
-        Integer[] free_tables = tableOrdersManager.freeTableNumbers();
-        for (Integer i: free_tables)
-            if (i == table)
-                table_occupied = false;
-
-        if (table_occupied) {
-            must_dispose = false;
-            view.dispose();
-            JOptionPane.showMessageDialog(null,
-                    "К сожалению, этот столик недавно заняли!",
-                    "Ошибка!",
-                    JOptionPane.WARNING_MESSAGE
-            );
-            return;
-        }
-
         if (table != -1) {
+            boolean table_occupied = true;
+            Integer[] free_tables = tableOrdersManager.freeTableNumbers();
+            for (Integer i: free_tables)
+                if (i == table)
+                    table_occupied = false;
+
+            if (table_occupied) {
+                must_dispose = false;
+                view.dispose();
+                JOptionPane.showMessageDialog(null,
+                        "К сожалению, этот столик недавно заняли!",
+                        "Ошибка!",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
             view.setTitle("Столик №"+table);
             tableOrdersManager.add(new TableOrder(client), table);
         }
