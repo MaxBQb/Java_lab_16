@@ -1,5 +1,8 @@
 package app.GUI;
+import app.Classes.Customer;
+import app.Classes.InternetOrder;
 import app.Controller.cDrinkGui;
+import app.Interfaces.IOrder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +14,7 @@ public class DrinkGui extends JFrame{
     JPanel jPanel = new JPanel(new GridLayout(1,2));
     public cDrinkGui controller;
 
-    public DrinkGui() {
+    public DrinkGui(IOrder iOrder) {
         super("Выбор напитка");
         setLayout(new GridLayout(2, 1));
         setSize(1400,200);
@@ -22,7 +25,11 @@ public class DrinkGui extends JFrame{
         add(jPanel);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cDrinkGui(this); // Связь View-Controller
+        controller = new cDrinkGui(this, iOrder); // Связь View-Controller
         setVisible(true);
+    }
+
+    public DrinkGui() {
+        this(new InternetOrder(Customer.MATURE_UNKNOWN_CUSTOMER));
     }
 }
