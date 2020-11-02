@@ -39,11 +39,11 @@ public class cOrder {
                     "Выберите вариант:",
                     JOptionPane.YES_NO_CANCEL_OPTION)) {
                 case JOptionPane.YES_OPTION:
-                    new DrinkGui(current_order);
+                    new DrinkGui(current_order, this);
                     break;
 
                 case JOptionPane.NO_OPTION:
-                    new DishGui(current_order);
+                    new DishGui(current_order, this);
                     break;
 
                 case JOptionPane.CANCEL_OPTION:
@@ -84,6 +84,10 @@ public class cOrder {
     public void dispose() {
         if (table != -1 && must_dispose)
             tableOrdersManager.remove(table);
+    }
+
+    public void updateOrderList() {
+
     }
 
     public static TableOrdersManager getTableOrdersManager() {

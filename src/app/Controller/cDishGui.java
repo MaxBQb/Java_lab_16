@@ -5,16 +5,15 @@ import app.Interfaces.IOrder;
 
 
 public class cDishGui {
-    public cDishGui(DishGui view, IOrder iOrder) {
+    public cDishGui(DishGui view, IOrder iOrder, cOrder order_panel) {
         for (int i = 0; i < ItemsRepository.dishesLength(); i++) {
             view.jComboBox.addItem((ItemsRepository.getDish(i)).toString());
         }
 
         view.button_ok.addActionListener(e -> {
-            //добавить добавление в заказ ору
-            String a =(String) view.jComboBox.getSelectedItem();
-
-            view.setVisible(false);
+            iOrder.add(ItemsRepository.getDish(view.jComboBox.getSelectedIndex()));
+            order_panel.updateOrderList();
+            view.dispose();
         });
     }
 }

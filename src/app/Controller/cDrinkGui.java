@@ -4,13 +4,13 @@ import app.GUI.DrinkGui;
 import app.Interfaces.IOrder;
 
 public class cDrinkGui {
-    public cDrinkGui(DrinkGui view, IOrder iOrder) {
+    public cDrinkGui(DrinkGui view, IOrder iOrder, cOrder order_panel) {
         for (int i = 0; i < ItemsRepository.drinksLength(); i++) {
             view.jComboBox.addItem((ItemsRepository.getDrink(i)).toString());
         }
 
         view.button_ok.addActionListener(e -> {
-            //добавить добавление в заказ ору
+            iOrder.add(ItemsRepository.getDrink(view.jComboBox.getSelectedIndex()));
             view.setVisible(false);
         });
     }
