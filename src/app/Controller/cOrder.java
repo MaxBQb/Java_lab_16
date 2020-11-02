@@ -22,8 +22,10 @@ public class cOrder {
             boolean table_occupied = true;
             Integer[] free_tables = tableOrdersManager.freeTableNumbers();
             for (Integer i: free_tables)
-                if (i == table)
+                if (i == table) {
                     table_occupied = false;
+                    break;
+                }
 
             if (table_occupied) {
                 must_dispose = false;
