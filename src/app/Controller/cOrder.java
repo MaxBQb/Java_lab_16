@@ -8,6 +8,8 @@ import app.Interfaces.IOrder;
 import app.Interfaces.OrdersManager;
 
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class cOrder {
     private static TableOrdersManager tableOrdersManager = new TableOrdersManager(16);
@@ -62,14 +64,26 @@ public class cOrder {
                 );
                 return;
             }
-
-            String name = JOptionPane.showInputDialog(view,
-                    "Введите название удаляемой позиции: ",
-                            items[0].getName()
-            );
-            if (!current_order.remove(name))
+            if (view.jList.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(view,
-                        "Ничего не найдено!",
+                        "Не выбран ни один пункт заказа!",
+                        "Ошибка!",
+                        JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+
+            boolean error = false;
+            try {
+                for (String del_name : view.jList.getSelectedValuesList())
+                    if (!current_order.remove(del_name))
+                        error = true;
+            } catch (Throwable ignore) {
+                error = true;
+            }
+            if (error)
+                JOptionPane.showMessageDialog(view,
+                        "При удалении возникла непредвиденная ошибка!",
                         "Ошибка!",
                         JOptionPane.WARNING_MESSAGE
                 );
@@ -98,6 +112,15 @@ public class cOrder {
 
             if (table == -1) {
                 internetOrdersManager.addOrder(current_order);
+                (new Timer()).schedule(new TimerTask() {
+                      @Override
+                      public void run() {
+                          cOrder.getInternetOrdersManager().removeOrder();
+                          if (cApplication.borrowPanel != null && cApplication.borrowPanel.controller != null)
+                              cApplication.borrowPanel.controller.updateOrdersList();
+                      }
+                  }, 1000 * 60
+                );
             } else {
                 tableOrdersManager.remove(table);
                 tableOrdersManager.add(current_order, table);
@@ -130,9 +153,6 @@ public class cOrder {
             view.setTitle("Столик №"+table);
             tableOrdersManager.add(current_order, table);
         }
-        else {
-
-        }
         view.setVisible(true);
     }
 
@@ -147,9 +167,9 @@ public class cOrder {
     }
 
     public void updateOrderList() {
-        view.jTextArea_order.setText("");
+        view.order_list.clear();
         for (String name: current_order.itemsNames())
-            view.jTextArea_order.append(name+"\n");
+            view.order_list.addElement(name);
         view.lbl_total.setText("Итого: "+current_order.costTotal()+" руб.");
     }
 

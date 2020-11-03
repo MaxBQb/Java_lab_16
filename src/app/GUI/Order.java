@@ -7,7 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Order extends JFrame {
-    public JTextArea jTextArea_order = new JTextArea(3, 20);
+    public DefaultListModel<String> order_list = new DefaultListModel<>();
+    public JList<String> jList = new JList<>(order_list);
     JScrollPane scrollBar;
     public JLabel lbl_total = new JLabel("Итого: 0 руб.", SwingConstants.CENTER);
     public JButton button_add = new JButton("Добавить"); //Добавление клиента
@@ -22,8 +23,8 @@ public class Order extends JFrame {
         setLayout(new GridLayout(2, 1));
         setSize(520,340);
 
-        jTextArea_order.setEditable(false);
-        scrollBar = new JScrollPane(this.jTextArea_order);
+        //jTextArea_order.setEditable(false);
+        scrollBar = new JScrollPane(jList);
         add(scrollBar);
 
         jPanel.add(button_remove);
