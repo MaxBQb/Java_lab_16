@@ -71,7 +71,8 @@ public class cBorrowPanel {
         if (online) {
             IOrder[] iOrder = cOrder.getInternetOrdersManager().getOrders();
             for (int i = 0; i < iOrder.length; i++)
-                view.defaultListModel.addElement(iOrder[i].getCustomer().getAddress().getZipCode() + "");
+                if (iOrder[i] != null)
+                    view.defaultListModel.addElement(iOrder[i].getCustomer().getAddress().getZipCode() + "");
         } else {
             IOrder[] iOrder = cOrder.getTableOrdersManager().getOrders();
             for (int i = 0; i < iOrder.length; i++)
