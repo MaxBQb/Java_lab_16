@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class TableReservationPanel extends JFrame {
     JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
-    JLabel jLabel_void = new JLabel("");
     public JButton button_continue = new JButton("Далее");
     public JComboBox jComboBox = new JComboBox();
     public cTableReservationPanel controller;
@@ -20,7 +19,7 @@ public class TableReservationPanel extends JFrame {
 
         //jComboBox.setBounds(40,40,90,20);
         add(jComboBox);
-        add(jLabel_void);
+        add(new JLabel()); // Skip cell
         add(button_continue);
 
         pack(); // Уважать окно

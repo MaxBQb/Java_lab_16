@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class AddDish extends JFrame {
-    JLabel jLabel_void = new JLabel("");
     public JComboBox jComboBox = new JComboBox();
     public JButton button_ok = new JButton("Ок");
     JPanel jPanel = new JPanel(new GridLayout(1,2));
@@ -23,7 +22,7 @@ public class AddDish extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         add(jComboBox);
-        jPanel.add(jLabel_void);
+        jPanel.add(new JLabel()); // Skip cell
         jPanel.add(button_ok);
         add(jPanel);
 

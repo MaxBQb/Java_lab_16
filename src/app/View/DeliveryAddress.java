@@ -17,7 +17,6 @@ public class DeliveryAddress extends JFrame {
     public JTextArea jTextArea_building  = new JTextArea(1, 10);
     JLabel jLabel_flat = new JLabel("Квартира: ", SwingConstants.CENTER);
     public JTextArea jTextArea_flat = new JTextArea(1, 10);
-    JLabel jLabel_void = new JLabel("");
     public JButton button_ok = new JButton("OK");
     public cDeliveryAddress controller;
 
@@ -51,7 +50,7 @@ public class DeliveryAddress extends JFrame {
         jTextArea_flat.setEditable(false);
         add(jTextArea_flat);
 
-        add(jLabel_void);
+        add(new JLabel()); // Skip cell
         add(button_ok);
         setLocationRelativeTo(null); // отцентрировать окно
 
