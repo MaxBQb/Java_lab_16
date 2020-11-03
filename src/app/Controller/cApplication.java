@@ -12,6 +12,7 @@ public class cApplication {
     private ChoiceTable choiceTable_panel;
     private LogIn login_panel;
     public static BorrowPanel borrowPanel;
+    public static final int TABLES_COUNT = 16;
 
     public cApplication(Application view) {
 

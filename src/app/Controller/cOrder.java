@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class cOrder {
-    private static TableOrdersManager tableOrdersManager = new TableOrdersManager(16);
+    private static TableOrdersManager tableOrdersManager = new TableOrdersManager(cApplication.TABLES_COUNT);
     private static InternetOrdersManager internetOrdersManager = new InternetOrdersManager();
     private int table;
     private IOrder current_order;
