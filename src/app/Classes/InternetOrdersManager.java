@@ -21,7 +21,6 @@ public class InternetOrdersManager implements OrdersManager {
 
     public boolean addOrder(IOrder order) {
         size++;
-        System.out.println(size);
         if (tail == null) {
             tail = new QueueNode(order);
             head = tail;
@@ -35,7 +34,6 @@ public class InternetOrdersManager implements OrdersManager {
     public IOrder removeOrder() {
         if (head == null)
             return null;
-        System.out.println(size);
         size--;
         IOrder value = head.value;
         head = head.next;
