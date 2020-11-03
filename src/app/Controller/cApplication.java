@@ -9,24 +9,24 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 
 public class cApplication {
-    private TableReservationPanel table_ReservationPanel_panel;
+    private TableReservationPanel table_reservation_panel;
     private AuthorizationPanel login_panel;
-    public static ManagerPanel managerPanel;
+    public static ManagerPanel manager_panel;
     public static final int TABLES_COUNT = 16;
 
     public cApplication(Application view) {
 
-        view.button_table.addActionListener(e -> {
+        view.btn_choose_table.addActionListener(e -> {
             if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == 1) {
-                if (managerPanel != null &&
-                        managerPanel.isVisible()
+                if (manager_panel != null &&
+                        manager_panel.isVisible()
                 ) return;
-                managerPanel = new ManagerPanel();
+                manager_panel = new ManagerPanel();
                 return;
             }
 
-            if (table_ReservationPanel_panel != null &&
-                table_ReservationPanel_panel.isVisible())
+            if (table_reservation_panel != null &&
+                table_reservation_panel.isVisible())
                 return;
 
             if (cOrderPanel.getTableOrdersManager().freeTableNumber() == -1) {
@@ -38,15 +38,15 @@ public class cApplication {
                 );
                 return;
             }
-            table_ReservationPanel_panel = new TableReservationPanel();
+            table_reservation_panel = new TableReservationPanel();
         });
 
-        view.button_online.addActionListener(e -> {
+        view.btn_make_online_order.addActionListener(e -> {
             if ((e.getModifiers() & ActionEvent.SHIFT_MASK) == 1) {
-                if (managerPanel != null &&
-                        managerPanel.isVisible()
+                if (manager_panel != null &&
+                        manager_panel.isVisible()
                 ) return;
-                managerPanel = new ManagerPanel(true);
+                manager_panel = new ManagerPanel(true);
                 return;
             }
             if (login_panel != null &&

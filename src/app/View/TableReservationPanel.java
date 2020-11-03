@@ -5,9 +5,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TableReservationPanel extends JFrame {
-    JLabel jLabel_choice = new JLabel("Выберите столик из доступных:");
-    public JButton button_continue = new JButton("Далее");
-    public JComboBox jComboBox = new JComboBox();
+    JLabel lbl_available_tables = new JLabel("Выберите столик из доступных:");
+    public JButton btn_continue = new JButton("Далее");
+    public JComboBox chbx_available_tables = new JComboBox();
     public cTableReservationPanel controller;
 
     public TableReservationPanel() {
@@ -15,14 +15,13 @@ public class TableReservationPanel extends JFrame {
         setLayout(new GridLayout(2, 2, 5, 5));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        add(jLabel_choice);
+        add(lbl_available_tables);
 
-        //jComboBox.setBounds(40,40,90,20);
-        add(jComboBox);
+        add(chbx_available_tables);
         add(new JLabel()); // Skip cell
-        add(button_continue);
+        add(btn_continue);
 
-        pack(); // Уважать окно
+        pack(); // Ужать окно
         setLocationRelativeTo(null); // отцентрировать окно
         controller = new cTableReservationPanel(this); // Связь View-Controller
         setVisible(true);

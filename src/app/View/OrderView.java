@@ -10,35 +10,32 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OrderView extends JFrame {
-    public JTextArea orders_list = new JTextArea(3, 20);
-    JScrollPane scrollBar;
-    public JLabel jLabel_name = new JLabel("Заказал: ", SwingConstants.CENTER);
-    public JButton button_address = new JButton("Адрес");
-    public JLabel jLabel_send = new JLabel("Доставить: ", SwingConstants.CENTER);
-    public JPanel jPanel;
+    public JTextArea output_orders_list = new JTextArea(3, 20);
+    public JLabel lbl_customer_name = new JLabel("Заказал: ", SwingConstants.CENTER);
+    public JButton btn_show_address = new JButton("Адрес");
+    public JLabel lbl_zipcode = new JLabel("Доставить: ", SwingConstants.CENTER);
+    public JPanel pnl_subgrid = new JPanel(new GridLayout(2, 2));;
     public cOrderView controller;
 
-    public OrderView(boolean online, IOrder iOrder, int table) {
+    public OrderView(boolean is_online, IOrder order, int table_number) {
         super("Заказ");
         setMinimumSize(new Dimension(600,300));
         setLayout(new GridLayout(2,1));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        orders_list.setEditable(false);
-        scrollBar = new JScrollPane(orders_list);
+        output_orders_list.setEditable(false);
 
-        jPanel = new JPanel(new GridLayout(2, 2));
-        jPanel.add(jLabel_name);
-        jPanel.add(button_address);
-        jPanel.add(jLabel_send);
+        pnl_subgrid.add(lbl_customer_name);
+        pnl_subgrid.add(btn_show_address);
+        pnl_subgrid.add(lbl_zipcode);
 
-        add(scrollBar);
-        add(jPanel);
+        add(new JScrollPane(output_orders_list));
+        add(pnl_subgrid);
 
         pack();
         setLocationRelativeTo(null); // отцентрировать окно
 
-        controller = new cOrderView(this, online, iOrder, table); // Связь View-Controller
+        controller = new cOrderView(this, is_online, order, table_number); // Связь View-Controller
         setVisible(true);
     }
 

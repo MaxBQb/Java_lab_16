@@ -5,21 +5,21 @@ import app.View.AddDrink;
 import app.Model.Interfaces.IOrder;
 
 public class cAddDrink {
-    public cAddDrink(AddDrink view, IOrder iOrder, cOrderPanel order_panel) {
+    public cAddDrink(AddDrink view, IOrder order, cOrderPanel order_panel) {
         for (int i = 0; i < ItemsRepository.drinksLength(); i++)
-            view.jComboBox.addItem((ItemsRepository.getDrink(i)).toString());
+            view.chbx_drinks.addItem((ItemsRepository.getDrink(i)).toString());
 
-        view.jLabel_eight_control.setVisible(false);
+        view.lbl_age_restriction.setVisible(false);
 
-        view.button_ok.addActionListener(e -> {
-            view.jLabel_eight_control.setVisible(false);
-            Drink new_drink = ItemsRepository.getDrink(view.jComboBox.getSelectedIndex());
-            if (new_drink.isAlcoholicDrink() && iOrder.getCustomer().getAge() < 18) {
-                view.jLabel_eight_control.setVisible(true);
+        view.btn_submit.addActionListener(e -> {
+            view.lbl_age_restriction.setVisible(false);
+            Drink new_drink = ItemsRepository.getDrink(view.chbx_drinks.getSelectedIndex());
+            if (new_drink.isAlcoholicDrink() && order.getCustomer().getAge() < 18) {
+                view.lbl_age_restriction.setVisible(true);
                 return;
             }
 
-            iOrder.add(new_drink);
+            order.add(new_drink);
             if (order_panel != null)
                 order_panel.updateOrderList();
             view.dispose();

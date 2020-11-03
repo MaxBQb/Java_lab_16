@@ -7,17 +7,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class DeliveryAddress extends JFrame {
-    JLabel jLabel_city = new JLabel("Название города: ", SwingConstants.CENTER);
-    public JTextArea jTextArea_city  = new JTextArea(1, 10);
-    JLabel jLabel_street = new JLabel("Название улицы: ", SwingConstants.CENTER);
-    public JTextArea jTextArea_street  = new JTextArea(1, 10);
-    JLabel jLabel_house = new JLabel("Дом: ", SwingConstants.CENTER);
-    public JTextArea jTextArea_house  = new JTextArea(1, 10);
-    JLabel jLabel_building = new JLabel("Корпус: ", SwingConstants.CENTER);
-    public JTextArea jTextArea_building  = new JTextArea(1, 10);
-    JLabel jLabel_flat = new JLabel("Квартира: ", SwingConstants.CENTER);
-    public JTextArea jTextArea_flat = new JTextArea(1, 10);
-    public JButton button_ok = new JButton("OK");
+    JLabel lbl_city = new JLabel("Название города: ", SwingConstants.CENTER);
+    public JTextArea output_city = new JTextArea(1, 10);
+    JLabel lbl_street = new JLabel("Название улицы: ", SwingConstants.CENTER);
+    public JTextArea output_street = new JTextArea(1, 10);
+    JLabel lbl_house = new JLabel("Дом: ", SwingConstants.CENTER);
+    public JTextArea output_house = new JTextArea(1, 10);
+    JLabel lbl_building = new JLabel("Корпус: ", SwingConstants.CENTER);
+    public JTextArea output_building = new JTextArea(1, 10);
+    JLabel lbl_flat = new JLabel("Квартира: ", SwingConstants.CENTER);
+    public JTextArea output_flat = new JTextArea(1, 10);
+    public JButton btn_submit = new JButton("OK");
     public cDeliveryAddress controller;
 
     public DeliveryAddress(Customer client) {
@@ -26,32 +26,32 @@ public class DeliveryAddress extends JFrame {
         setLayout(new GridLayout(6, 2, 1, 5));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        add(jLabel_city);
-        jTextArea_city.setEditable(false);
-        add(jTextArea_city);
+        add(lbl_city);
+        output_city.setEditable(false);
+        add(output_city);
 
-        add(jLabel_street);
-        jTextArea_street.setEditable(false);
-        add(jTextArea_street);
+        add(lbl_street);
+        output_street.setEditable(false);
+        add(output_street);
 
-        add(jLabel_house);
-        jTextArea_house.setEditable(false);
-        add(jTextArea_house);
+        add(lbl_house);
+        output_house.setEditable(false);
+        add(output_house);
 
-        add(jLabel_building);
-        jTextArea_building.setEditable(false);
-        add(jTextArea_building);
+        add(lbl_building);
+        output_building.setEditable(false);
+        add(output_building);
 
-        add(jLabel_building);
-        jTextArea_building.setEditable(false);
-        add(jTextArea_building);
+        add(lbl_building);
+        output_building.setEditable(false);
+        add(output_building);
 
-        add(jLabel_flat);
-        jTextArea_flat.setEditable(false);
-        add(jTextArea_flat);
+        add(lbl_flat);
+        output_flat.setEditable(false);
+        add(output_flat);
 
         add(new JLabel()); // Skip cell
-        add(button_ok);
+        add(btn_submit);
         setLocationRelativeTo(null); // отцентрировать окно
 
         controller = new cDeliveryAddress(this, client); // Связь View-Controller

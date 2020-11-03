@@ -6,31 +6,31 @@ import app.View.OrderView;
 import app.Model.Interfaces.IOrder;
 
 public class cOrderView {
-    private DeliveryAddress deliveryAddress;
-    public cOrderView(OrderView view, boolean online, IOrder iOrder, int table) {
-       view.jLabel_name.setText("Заказал: " + iOrder.getCustomer().getSecondName()  + " " +iOrder.getCustomer().getFirstName());
+    private DeliveryAddress delivery_address;
+    public cOrderView(OrderView view, boolean is_online, IOrder order, int table_number) {
+       view.lbl_customer_name.setText("Заказал: " + order.getCustomer().getSecondName()  + " " +order.getCustomer().getFirstName());
 
-       if (online) {
-           view.button_address.setVisible(true);
+       if (is_online) {
+           view.btn_show_address.setVisible(true);
            view.setTitle("Интернет-заказ");
-           view.jLabel_send.setText("Номер заказа: " + iOrder.getCustomer().getAddress().getZipCode());
+           view.lbl_zipcode.setText("Номер заказа: " + order.getCustomer().getAddress().getZipCode());
        } else {
-           view.button_address.setVisible(false);
-           view.setTitle("Столик №" + table);
-           view.jLabel_send.setText("");
-           view.remove(view.jPanel);
-           view.add(view.jLabel_name);
+           view.btn_show_address.setVisible(false);
+           view.setTitle("Столик №" + table_number);
+           view.lbl_zipcode.setText("");
+           view.remove(view.pnl_subgrid);
+           view.add(view.lbl_customer_name);
        }
 
-       view.orders_list.setText("");
-       for (MenuItem item: iOrder.getItems())
+       view.output_orders_list.setText("");
+       for (MenuItem item: order.getItems())
            if (item != null)
-               view.orders_list.append(item.getName() + ": " + item.getCost() + "₽\n");
+               view.output_orders_list.append(item.getName() + ": " + item.getCost() + "₽\n");
 
-       if (online)
-           view.button_address.addActionListener(e -> {
-               if (deliveryAddress == null || !deliveryAddress.isVisible())
-                   deliveryAddress = new DeliveryAddress(iOrder.getCustomer());
+       if (is_online)
+           view.btn_show_address.addActionListener(e -> {
+               if (delivery_address == null || !delivery_address.isVisible())
+                   delivery_address = new DeliveryAddress(order.getCustomer());
            });
     }
 }

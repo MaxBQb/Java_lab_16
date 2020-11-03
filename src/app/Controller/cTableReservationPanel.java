@@ -7,12 +7,12 @@ import javax.swing.*;
 public class cTableReservationPanel {
     public cTableReservationPanel(TableReservationPanel view) {
         updateTables(view);
-        view.button_continue.addActionListener(e -> {
-            int table = Integer.parseInt(view.jComboBox.getSelectedItem().toString().split("№")[1]);
+        view.btn_continue.addActionListener(e -> {
+            int table_number = Integer.parseInt(view.chbx_available_tables.getSelectedItem().toString().split("№")[1]);
             Integer[] free_tables = cOrderPanel.getTableOrdersManager().freeTableNumbers();
-            for (Integer i: free_tables)
-                if (i == table) {
-                    new AuthorizationPanel(false, table);
+            for (Integer free_table_number: free_tables)
+                if (free_table_number == table_number) {
+                    new AuthorizationPanel(false, table_number);
                     view.dispose();
                     return;
                 }
@@ -31,9 +31,9 @@ public class cTableReservationPanel {
 
     private void updateTables(TableReservationPanel view) {
         Integer[] free_tables = cOrderPanel.getTableOrdersManager().freeTableNumbers();
-        view.jComboBox.removeAllItems();
+        view.chbx_available_tables.removeAllItems();
         for (Integer i: free_tables) {
-            view.jComboBox.addItem("Столик №"+i);
+            view.chbx_available_tables.addItem("Столик №"+i);
         }
     }
 }

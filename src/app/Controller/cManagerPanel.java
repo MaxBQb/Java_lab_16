@@ -7,26 +7,26 @@ import javax.swing.*;
 
 public class cManagerPanel {
     private ManagerPanel view;
-    private boolean online;
+    private boolean is_online;
     public static final int MAX_VIEWERS_COUNT = 6;
-    private static int openedOrderViewers = 0;
+    private static int opened_order_viewers = 0;
 
-    public cManagerPanel(ManagerPanel view, boolean online) {
+    public cManagerPanel(ManagerPanel view, boolean is_online) {
         this.view = view;
-        this.online = online;
+        this.is_online = is_online;
         updateOrdersList();
 
-        view.button_add.addActionListener(e -> {
-            if (view.jList.getSelectedValue() == null)
+        view.btn_view.addActionListener(e -> {
+            if (view.selection_list_view.getSelectedValue() == null)
                 return;
 
-            if (online) {
-                IOrder[] iOrder = cOrderPanel.getInternetOrdersManager().getOrders();
-                int code = Integer.parseInt(view.jList.getSelectedValue().toString());
+            if (is_online) {
+                IOrder[] orders = cOrderPanel.getInternetOrdersManager().getOrders();
+                int zip_code = Integer.parseInt(view.selection_list_view.getSelectedValue().toString());
 
-                for (int i = 0; i < iOrder.length; i++)
-                    if (code == iOrder[i].getCustomer().getAddress().getZipCode()) {
-                        if (openedOrderViewers >= MAX_VIEWERS_COUNT) {
+                for (int i = 0; i < orders.length; i++)
+                    if (zip_code == orders[i].getCustomer().getAddress().getZipCode()) {
+                        if (opened_order_viewers >= MAX_VIEWERS_COUNT) {
                             JOptionPane.showMessageDialog(view,
                                     "Невозможно создать более "+MAX_VIEWERS_COUNT+
                                             " окон(-а) этого типа.",
@@ -35,13 +35,13 @@ public class cManagerPanel {
                             );
                             return;
                         }
-                        new OrderView(true, iOrder[i], -1);
-                        openedOrderViewers++;
+                        new OrderView(true, orders[i], -1);
+                        opened_order_viewers++;
                         break;
                     }
             } else {
-                int table = Integer.parseInt(view.jList.getSelectedValue().toString().split("№")[1]);
-                if (openedOrderViewers >= MAX_VIEWERS_COUNT) {
+                int table = Integer.parseInt(view.selection_list_view.getSelectedValue().toString().split("№")[1]);
+                if (opened_order_viewers >= MAX_VIEWERS_COUNT) {
                     JOptionPane.showMessageDialog(view,
                             "Невозможно создать более "+MAX_VIEWERS_COUNT+
                                     " окон(-а) этого типа.",
@@ -51,30 +51,30 @@ public class cManagerPanel {
                     return;
                 }
                 new OrderView(false, cOrderPanel.getTableOrdersManager().getOrder(table), table);
-                openedOrderViewers++;
+                opened_order_viewers++;
             }
         });
 
-        view.button_remove.addActionListener(e -> {
-            if (view.jList.getSelectedValue() == null)
+        view.btn_remove_order.addActionListener(e -> {
+            if (view.selection_list_view.getSelectedValue() == null)
                 return;
 
-            if (online) {
-                if (view.jList.getMaxSelectionIndex() != 0) {
-                    view.jList.setSelectedIndex(0);
+            if (is_online) {
+                if (view.selection_list_view.getMaxSelectionIndex() != 0) {
+                    view.selection_list_view.setSelectedIndex(0);
                     return;
                 }
                 cOrderPanel.getInternetOrdersManager().removeOrder();
             } else {
-                int table = Integer.parseInt(view.jList.getSelectedValue().toString().split("№")[1]);
+                int table = Integer.parseInt(view.selection_list_view.getSelectedValue().toString().split("№")[1]);
                 cOrderPanel.getTableOrdersManager().remove(table);
             }
             updateOrdersList();
         });
 
-        view.button_sum.addActionListener(e -> {
+        view.btn_get_summary.addActionListener(e -> {
             long sum = 0;
-            if (online)
+            if (is_online)
                 sum = cOrderPanel.getInternetOrdersManager().ordersCostSummary();
             else
                 sum = cOrderPanel.getTableOrdersManager().ordersCostSummary();
@@ -89,24 +89,24 @@ public class cManagerPanel {
     }
 
     public static void disposeListener() {
-        if (openedOrderViewers > 0)
-            openedOrderViewers--;
+        if (opened_order_viewers > 0)
+            opened_order_viewers--;
         else
             System.exit(1);
     }
 
     public void updateOrdersList() {
-        view.defaultListModel.clear();
-        if (online) {
+        view.selection_list_model.clear();
+        if (is_online) {
             IOrder[] iOrder = cOrderPanel.getInternetOrdersManager().getOrders();
             for (int i = 0; i < iOrder.length; i++)
                 if (iOrder[i] != null)
-                    view.defaultListModel.addElement(iOrder[i].getCustomer().getAddress().getZipCode() + "");
+                    view.selection_list_model.addElement(iOrder[i].getCustomer().getAddress().getZipCode() + "");
         } else {
             IOrder[] iOrder = cOrderPanel.getTableOrdersManager().getOrders();
             for (int i = 0; i < iOrder.length; i++)
                 if (iOrder[i] != null)
-                    view.defaultListModel.addElement("Столик №" + (i + 1));
+                    view.selection_list_model.addElement("Столик №" + (i + 1));
         }
     }
 }

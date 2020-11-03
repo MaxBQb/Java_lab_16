@@ -20,8 +20,8 @@ public class isNumber extends InputVerifier {
     public boolean verify(JComponent input) {
         String text = ((JTextArea)input).getText();
         try {
-            int a = Integer.parseInt(text);
-            if (a < minimum || a > maximum)
+            int value = Integer.parseInt(text);
+            if (value < minimum || value > maximum)
                 throw new Exception();
             return true;
         } catch (Throwable ignore) {

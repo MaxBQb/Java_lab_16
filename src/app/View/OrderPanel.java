@@ -7,35 +7,32 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OrderPanel extends JFrame {
-    public DefaultListModel<String> order_list = new DefaultListModel<>();
-    public JList<String> jList = new JList<>(order_list);
-    JScrollPane scrollBar;
-    public JLabel lbl_total = new JLabel("Итого: 0 руб.", SwingConstants.CENTER);
-    public JButton button_add = new JButton("Добавить"); //Добавление клиента
-    public JButton button_remove = new JButton("Удалить"); //Добавление клиента
-    public JButton button_score = new JButton("Счёт");
-    JPanel jPanel = new JPanel(new GridLayout(2,2));
+    public DefaultListModel<String> order_list_model = new DefaultListModel<>();
+    public JList<String> order_list_view = new JList<>(order_list_model);
+    public JLabel lbl_total_sum = new JLabel("Итого: 0 руб.", SwingConstants.CENTER);
+    public JButton btn_add_item = new JButton("Добавить"); //Добавление клиента
+    public JButton btn_remove_item = new JButton("Удалить"); //Добавление клиента
+    public JButton btn_get_total_sum = new JButton("Счёт");
+    JPanel pnl_subgrid = new JPanel(new GridLayout(2,2));
     public cOrderPanel controller;
 
-    public OrderPanel(Customer client, int table) {
+    public OrderPanel(Customer client, int table_number) {
         super("Корзина");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(new GridLayout(2, 1));
         setSize(520,340);
 
-        //jTextArea_order.setEditable(false);
-        scrollBar = new JScrollPane(jList);
-        add(scrollBar);
+        add(new JScrollPane(order_list_view));
 
-        jPanel.add(button_remove);
-        jPanel.add(lbl_total);
+        pnl_subgrid.add(btn_remove_item);
+        pnl_subgrid.add(lbl_total_sum);
 
-        jPanel.add(button_add);
-        jPanel.add(button_score);
-        add(jPanel);
+        pnl_subgrid.add(btn_add_item);
+        pnl_subgrid.add(btn_get_total_sum);
+        add(pnl_subgrid);
 
         setLocationRelativeTo(null); // отцентрировать окно
-        controller = new cOrderPanel(this, client, table); // Связь View-Controller
+        controller = new cOrderPanel(this, client, table_number); // Связь View-Controller
     }
 
     public OrderPanel(Customer client) {

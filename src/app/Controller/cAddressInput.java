@@ -10,17 +10,17 @@ public class cAddressInput {
     private Address current_address;
 
     public cAddressInput(AddressInput view) {
-        int zipCode = (int)(Math.random()*10000);
-        view.jLabel_code.setText(
-                view.jLabel_code.getText().replace(
+        int zip_code = (int)(Math.random()*10000);
+        view.lbl_zip_code.setText(
+                view.lbl_zip_code.getText().replace(
                         "ХХХХ",
-                        ""+zipCode
+                        ""+zip_code
                 ));
-        view.jTextArea_flat.setInputVerifier(new isNumber());
-        view.jTextArea_house.setInputVerifier(new isNumber());
-        view.jTextArea_street.setInputVerifier(new hasContent());
-        view.jTextArea_city.setInputVerifier(new hasContent());
-        view.jTextArea_building.setInputVerifier(new InputVerifier() {
+        view.input_flat.setInputVerifier(new isNumber());
+        view.input_building.setInputVerifier(new isNumber());
+        view.input_street.setInputVerifier(new hasContent());
+        view.input_city.setInputVerifier(new hasContent());
+        view.input_building_letter.setInputVerifier(new InputVerifier() {
             @Override
             public boolean verify(JComponent input) {
                 String text = ((JTextArea)input).getText();
@@ -36,30 +36,30 @@ public class cAddressInput {
             }
         });
 
-        view.button_ok.addActionListener(e -> {
+        view.btn_submit.addActionListener(e -> {
             JTextArea[] fields = {
-                    view.jTextArea_city,
-                    view.jTextArea_street,
-                    view.jTextArea_building,
-                    view.jTextArea_house,
-                    view.jTextArea_flat
+                    view.input_city,
+                    view.input_street,
+                    view.input_building_letter,
+                    view.input_building,
+                    view.input_flat
             };
             for (JTextArea field: fields)
                 if (field.getInputVerifier() != null &&
                         !field.getInputVerifier().verify(field))
                     return;
             try {
-                String city = view.jTextArea_city.getText().strip();
-                String street = view.jTextArea_street.getText().strip();
-                String building_ = view.jTextArea_building.getText().strip();
-                char building;
-                if (building_.isBlank())
-                    building = ' ';
+                String city = view.input_city.getText().strip();
+                String street = view.input_street.getText().strip();
+                String building_letter_buffer = view.input_building_letter.getText().strip();
+                char building_letter;
+                if (building_letter_buffer.isBlank())
+                    building_letter = ' ';
                 else
-                    building = building_.charAt(0);
-                int house = Integer.parseInt(view.jTextArea_house.getText());
-                int flat = Integer.parseInt(view.jTextArea_flat.getText());
-                current_address = new Address(city, zipCode, street, house, building, flat);
+                    building_letter = building_letter_buffer.charAt(0);
+                int building = Integer.parseInt(view.input_building.getText());
+                int flat = Integer.parseInt(view.input_flat.getText());
+                current_address = new Address(city, zip_code, street, building, building_letter, flat);
             } catch (Throwable ignore) {
                 return;
             }

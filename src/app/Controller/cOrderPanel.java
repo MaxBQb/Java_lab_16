@@ -12,30 +12,30 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class cOrderPanel {
-    private static TableOrdersManager tableOrdersManager = new TableOrdersManager(cApplication.TABLES_COUNT);
-    private static InternetOrdersManager internetOrdersManager = new InternetOrdersManager();
-    private int table;
+    private static TableOrdersManager table_orders_manager = new TableOrdersManager(cApplication.TABLES_COUNT);
+    private static InternetOrdersManager internet_orders_manager = new InternetOrdersManager();
+    private int table_number;
     private IOrder current_order;
     private OrdersManager current_orders_manager;
     private boolean must_dispose;
     private OrderPanel view;
 
-    public cOrderPanel(OrderPanel view, Customer client, int table) {
-        this.table = table;
+    public cOrderPanel(OrderPanel view, Customer client, int table_number) {
+        this.table_number = table_number;
         this.view = view;
         must_dispose = true;
 
-        if (table == -1) {
-            current_orders_manager = internetOrdersManager;
+        if (table_number == -1) {
+            current_orders_manager = internet_orders_manager;
             current_order = new InternetOrder(client);
         } else {
-            current_orders_manager = tableOrdersManager;
+            current_orders_manager = table_orders_manager;
             current_order = new TableOrder(client);
         }
 
-        view.lbl_total.setText("");
+        view.lbl_total_sum.setText("");
 
-        view.button_add.addActionListener(e -> {
+        view.btn_add_item.addActionListener(e -> {
             switch (JOptionPane.showConfirmDialog(view,
                     "Добавить напиток?\n" +
                             "YES = Напиток\n" +
@@ -54,7 +54,7 @@ public class cOrderPanel {
                     return;
             }
         });
-        view.button_remove.addActionListener(e -> {
+        view.btn_remove_item.addActionListener(e -> {
             MenuItem[] items = current_order.getItems();
             if (items.length == 0) {
                 JOptionPane.showMessageDialog(view,
@@ -64,7 +64,7 @@ public class cOrderPanel {
                 );
                 return;
             }
-            if (view.jList.getSelectedIndex() == -1) {
+            if (view.order_list_view.getSelectedIndex() == -1) {
                 JOptionPane.showMessageDialog(view,
                         "Не выбран ни один пункт заказа!",
                         "Ошибка!",
@@ -73,15 +73,15 @@ public class cOrderPanel {
                 return;
             }
 
-            boolean error = false;
+            boolean error_flag = false;
             try {
-                for (String del_name : view.jList.getSelectedValuesList())
-                    if (!current_order.remove(del_name))
-                        error = true;
+                for (String name : view.order_list_view.getSelectedValuesList())
+                    if (!current_order.remove(name))
+                        error_flag = true;
             } catch (Throwable ignore) {
-                error = true;
+                error_flag = true;
             }
-            if (error)
+            if (error_flag)
                 JOptionPane.showMessageDialog(view,
                         "При удалении возникла непредвиденная ошибка!",
                         "Ошибка!",
@@ -90,7 +90,7 @@ public class cOrderPanel {
             updateOrderList();
         });
 
-        view.button_score.addActionListener(e -> {
+        view.btn_get_total_sum.addActionListener(e -> {
             if (current_order.itemsQuantity() == 0) {
                 JOptionPane.showMessageDialog(view,
                         "Вы, пока ещё, ничего не заказали!",
@@ -106,35 +106,35 @@ public class cOrderPanel {
                     JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION)
                 return;
 
-            view.button_score.setEnabled(false);
-            view.button_add.setEnabled(false);
-            view.button_remove.setEnabled(false);
+            view.btn_get_total_sum.setEnabled(false);
+            view.btn_add_item.setEnabled(false);
+            view.btn_remove_item.setEnabled(false);
 
-            if (table == -1) {
-                internetOrdersManager.addOrder(current_order);
+            if (table_number == -1) {
+                internet_orders_manager.addOrder(current_order);
                 (new Timer()).schedule(new TimerTask() {
                       @Override
                       public void run() {
                           cOrderPanel.getInternetOrdersManager().removeOrder();
-                          if (cApplication.managerPanel != null && cApplication.managerPanel.controller != null)
-                              cApplication.managerPanel.controller.updateOrdersList();
+                          if (cApplication.manager_panel != null && cApplication.manager_panel.controller != null)
+                              cApplication.manager_panel.controller.updateOrdersList();
                       }
                   }, 1000 * 60
                 );
             } else {
-                tableOrdersManager.remove(table);
-                tableOrdersManager.add(current_order, table);
+                table_orders_manager.remove(table_number);
+                table_orders_manager.add(current_order, table_number);
             }
 
-            if (cApplication.managerPanel != null && cApplication.managerPanel.controller != null)
-                cApplication.managerPanel.controller.updateOrdersList();
+            if (cApplication.manager_panel != null && cApplication.manager_panel.controller != null)
+                cApplication.manager_panel.controller.updateOrdersList();
         });
 
-        if (table != -1) {
+        if (table_number != -1) {
             boolean table_occupied = true;
-            Integer[] free_tables = tableOrdersManager.freeTableNumbers();
-            for (Integer i: free_tables)
-                if (i == table) {
+            Integer[] free_tables = table_orders_manager.freeTableNumbers();
+            for (Integer free_table_number: free_tables)
+                if (free_table_number == table_number) {
                     table_occupied = false;
                     break;
                 }
@@ -150,8 +150,8 @@ public class cOrderPanel {
                 return;
             }
 
-            view.setTitle("Столик №"+table);
-            tableOrdersManager.add(current_order, table);
+            view.setTitle("Столик №"+ table_number);
+            table_orders_manager.add(current_order, table_number);
         }
         view.setVisible(true);
     }
@@ -159,25 +159,25 @@ public class cOrderPanel {
     public void dispose() {
         if (!must_dispose)
             return;
-        if (table != -1) {
-            tableOrdersManager.remove(table);
-            if (cApplication.managerPanel != null && cApplication.managerPanel.controller != null)
-                cApplication.managerPanel.controller.updateOrdersList();
+        if (table_number != -1) {
+            table_orders_manager.remove(table_number);
+            if (cApplication.manager_panel != null && cApplication.manager_panel.controller != null)
+                cApplication.manager_panel.controller.updateOrdersList();
         }
     }
 
     public void updateOrderList() {
-        view.order_list.clear();
+        view.order_list_model.clear();
         for (String name: current_order.itemsNames())
-            view.order_list.addElement(name);
-        view.lbl_total.setText("Итого: "+current_order.costTotal()+" руб.");
+            view.order_list_model.addElement(name);
+        view.lbl_total_sum.setText("Итого: "+current_order.costTotal()+" руб.");
     }
 
     public static TableOrdersManager getTableOrdersManager() {
-        return tableOrdersManager;
+        return table_orders_manager;
     }
 
     public static InternetOrdersManager getInternetOrdersManager() {
-        return internetOrdersManager;
+        return internet_orders_manager;
     }
 }
