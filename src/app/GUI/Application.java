@@ -14,8 +14,11 @@ public class Application extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridLayout(2, 2, 0, 5));
 
+        greetings.setToolTipText("Здесь притаился Павел");
         add(greetings);
         JPanel grid = new JPanel();
+        button_online.setToolTipText("Shift + ЛКМ для входа в качестве менеджера");
+        button_table.setToolTipText("Shift + ЛКМ для входа в качестве менеджера");
         grid.add(button_table);
         grid.add(button_online);
 
