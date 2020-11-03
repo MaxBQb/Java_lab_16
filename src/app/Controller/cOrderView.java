@@ -1,26 +1,36 @@
 package app.Controller;
 
-import app.Classes.Customer;
+import app.Classes.MenuItem;
 import app.GUI.DeliveryAddress;
 import app.GUI.OrderView;
+import app.Interfaces.IOrder;
 
 public class cOrderView {
     private DeliveryAddress deliveryAddress;
-    public cOrderView(OrderView view, boolean online, Customer client, int table) {
-       view.jLabel_name.setText("Заказал: " + client.getFirstName() + " " + client.getSecondName());
+    public cOrderView(OrderView view, boolean online, IOrder iOrder, int table) {
+       view.jLabel_name.setText("Заказал: " + iOrder.getCustomer().getSecondName()  + " " +iOrder.getCustomer().getFirstName());
 
        if (online) {
+           view.button_address.setVisible(true);
            view.setTitle("Интернет-заказ");
-           view.jLabel_send.setText("Номер заказа: " + client.getAddress().getZipCode());
+           view.jLabel_send.setText("Номер заказа: " + iOrder.getCustomer().getAddress().getZipCode());
        } else {
+           view.button_address.setVisible(false);
            view.setTitle("Столик №" + table);
            view.jLabel_send.setText("");
+           view.remove(view.jPanel);
+           view.add(view.jLabel_name);
        }
+
+       view.orders_list.setText("");
+       for (MenuItem item: iOrder.getItems())
+           if (item != null)
+               view.orders_list.append(item.getName() + ": " + item.getCost() + "₽\n");
 
        if (online)
            view.button_address.addActionListener(e -> {
                if (deliveryAddress == null || !deliveryAddress.isVisible())
-                   deliveryAddress = new DeliveryAddress(client);
+                   deliveryAddress = new DeliveryAddress(iOrder.getCustomer());
            });
     }
 }

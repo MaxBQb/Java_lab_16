@@ -16,6 +16,8 @@ public class BorrowPanel extends JFrame {
     public BorrowPanel(boolean online) {
         super("Menu");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setMinimumSize(new Dimension(600,300));
+
 
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1));
         buttonPanel.add(button_add);
@@ -32,7 +34,6 @@ public class BorrowPanel extends JFrame {
 
         jList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         add(new JScrollPane(jList));
-        pack();
         setLocationRelativeTo(null); // отцентрировать окно
 
         controller = new cBorrowPanel(this, online); // Связь View-Controller

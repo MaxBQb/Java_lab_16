@@ -23,8 +23,7 @@ public class DeliveryAddress extends JFrame {
 
     public DeliveryAddress(Customer client) {
         super("Адрес доставки");
-        setSize(400,300);
-        setMinimumSize(new Dimension(400,300));
+        setMinimumSize(new Dimension(300,220));
         setLayout(new GridLayout(6, 2, 1, 5));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

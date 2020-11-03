@@ -1,8 +1,10 @@
 package app.GUI;
 
 import app.Classes.Customer;
+import app.Classes.InternetOrder;
 import app.Controller.cBorrowPanel;
 import app.Controller.cOrderView;
+import app.Interfaces.IOrder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,18 +12,18 @@ import java.awt.*;
 public class OrderView extends JFrame {
     public JTextArea orders_list = new JTextArea(3, 20);
     JScrollPane scrollBar;
-    public JLabel jLabel_name = new JLabel("Заказал: ");
+    public JLabel jLabel_name = new JLabel("Заказал: ", SwingConstants.CENTER);
     public JButton button_address = new JButton("Адрес");
-    public JLabel jLabel_send = new JLabel("Доставить: ");
-    JPanel jPanel;
+    public JLabel jLabel_send = new JLabel("Доставить: ", SwingConstants.CENTER);
+    public JPanel jPanel;
     public cOrderView controller;
 
-    public OrderView(boolean online, Customer client, int table) {
+    public OrderView(boolean online, IOrder iOrder, int table) {
         super("Заказ");
+        setMinimumSize(new Dimension(600,300));
         setLayout(new GridLayout(2,1));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        orders_list.setText("");
         orders_list.setEditable(false);
         scrollBar = new JScrollPane(orders_list);
 
@@ -36,12 +38,12 @@ public class OrderView extends JFrame {
         pack();
         setLocationRelativeTo(null); // отцентрировать окно
 
-        controller = new cOrderView(this, online, client, table); // Связь View-Controller
+        controller = new cOrderView(this, online, iOrder, table); // Связь View-Controller
         setVisible(true);
     }
 
     public OrderView() {
-        this(true, Customer.MATURE_UNKNOWN_CUSTOMER, -1);
+        this(true, new InternetOrder(Customer.MATURE_UNKNOWN_CUSTOMER), -1);
     }
 
     public void dispose() {

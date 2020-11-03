@@ -35,7 +35,7 @@ public class cBorrowPanel {
                             );
                             return;
                         }
-                        new OrderView(true, iOrder[i].getCustomer(), -1);
+                        new OrderView(true, iOrder[i], -1);
                         openedOrderViewers++;
                         break;
                     }
@@ -50,7 +50,7 @@ public class cBorrowPanel {
                     );
                     return;
                 }
-                new OrderView(false, cOrder.getTableOrdersManager().getOrder(table).getCustomer(), table);
+                new OrderView(false, cOrder.getTableOrdersManager().getOrder(table), table);
                 openedOrderViewers++;
             }
         });
