@@ -39,7 +39,7 @@ public final class Drink extends MenuItem implements Alcoholable {
     }
 
     public boolean isAlcoholicDrink() {
-        return alcoholVol > 0;
+        return alcoholVol > 10.0;
     }
 
     public String toString() {

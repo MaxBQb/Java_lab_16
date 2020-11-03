@@ -1,4 +1,5 @@
 package app.Controller;
+import app.Classes.Drink;
 import app.Classes.ItemsRepository;
 import app.GUI.DrinkGui;
 import app.Interfaces.IOrder;
@@ -8,15 +9,17 @@ public class cDrinkGui {
         for (int i = 0; i < ItemsRepository.drinksLength(); i++)
             view.jComboBox.addItem((ItemsRepository.getDrink(i)).toString());
 
-        if (iOrder.getCustomer().getAge() < 18)
-            view.jLabel_eight_control.setText("Вам нет 18! Алкогольные напитки до совершенолетием запрещены законом РФ");
+        view.jLabel_eight_control.setVisible(false);
 
         view.button_ok.addActionListener(e -> {
-            if (iOrder.getCustomer().getAge() >= 18)
-                iOrder.add(ItemsRepository.getDrink(view.jComboBox.getSelectedIndex()));
-            else if (ItemsRepository.getDrink(view.jComboBox.getSelectedIndex()).getAlcoholVol() < 10.0)
-                iOrder.add(ItemsRepository.getDrink(view.jComboBox.getSelectedIndex()));
+            view.jLabel_eight_control.setVisible(false);
+            Drink new_drink = ItemsRepository.getDrink(view.jComboBox.getSelectedIndex());
+            if (new_drink.isAlcoholicDrink() && iOrder.getCustomer().getAge() < 18) {
+                view.jLabel_eight_control.setVisible(true);
+                return;
+            }
 
+            iOrder.add(new_drink);
             if (order_panel != null)
                 order_panel.updateOrderList();
             view.dispose();
