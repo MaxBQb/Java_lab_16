@@ -20,6 +20,7 @@ public class DeliveryAddress extends JFrame {
     JLabel jLabel_void = new JLabel("");
     public JButton button_ok = new JButton("OK");
     public cDeliveryAddress controller;
+
     public DeliveryAddress(Customer client) {
         super("Адрес доставки");
         setSize(400,300);

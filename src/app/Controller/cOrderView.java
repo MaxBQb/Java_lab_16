@@ -12,15 +12,15 @@ public class cOrderView {
        if (online) {
            view.setTitle("Интернет-заказ");
            view.jLabel_send.setText("Номер заказа: " + client.getAddress().getZipCode());
-       }
-       else {
+       } else {
            view.setTitle("Столик №" + table);
            view.jLabel_send.setText("");
        }
 
-        if (online)
-            view.button_address.addActionListener(e -> {
-                deliveryAddress = new DeliveryAddress(client);
-            });
+       if (online)
+           view.button_address.addActionListener(e -> {
+               if (deliveryAddress == null || !deliveryAddress.isVisible())
+                   deliveryAddress = new DeliveryAddress(client);
+           });
     }
 }
