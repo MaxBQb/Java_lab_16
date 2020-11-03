@@ -1,0 +1,33 @@
+package app.View;
+import app.Controller.cApplication;
+import javax.swing.*;
+import java.awt.*;
+
+public class Application extends JFrame {
+    public cApplication controller;
+    JLabel greetings = new JLabel("Приветствуем вас в ресторане у Максима и Ильи!", SwingConstants.CENTER);
+    public JButton button_table = new JButton("Забронировать столик");
+    public JButton button_online = new JButton("Онлайн-заказ");
+
+    public Application() {
+        super("Ресторан");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new GridLayout(2, 2, 0, 5));
+
+        greetings.setToolTipText("Здесь притаился Павел");
+        add(greetings);
+        JPanel grid = new JPanel();
+        button_online.setToolTipText("Shift + ЛКМ для входа в качестве менеджера");
+        button_table.setToolTipText("Shift + ЛКМ для входа в качестве менеджера");
+        grid.add(button_table);
+        grid.add(button_online);
+
+        getContentPane().add(grid);
+
+        pack(); // Уважать окно
+        setLocationRelativeTo(null); // отцентрировать окно
+        controller = new cApplication(this); // Связь View-Controller
+        setVisible(true);
+    }
+}
+

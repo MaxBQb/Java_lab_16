@@ -1,7 +1,7 @@
 package app.Controller;
 
-import app.Classes.Customer;
-import app.GUI.DeliveryAddress;
+import app.Model.Customer;
+import app.View.DeliveryAddress;
 
 public class cDeliveryAddress {
     public cDeliveryAddress(DeliveryAddress view, Customer client){

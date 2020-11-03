@@ -1,9 +1,9 @@
 package app.Controller;
 
-import app.Classes.MenuItem;
-import app.GUI.DeliveryAddress;
-import app.GUI.OrderView;
-import app.Interfaces.IOrder;
+import app.Model.MenuItem;
+import app.View.DeliveryAddress;
+import app.View.OrderView;
+import app.Model.Interfaces.IOrder;
 
 public class cOrderView {
     private DeliveryAddress deliveryAddress;

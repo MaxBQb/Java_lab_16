@@ -1,5 +1,5 @@
 package app;
-import app.GUI.*;
+import app.View.*;
 
 class Main {
     public static void main(String[] args) {
