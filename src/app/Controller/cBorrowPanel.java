@@ -8,7 +8,8 @@ import javax.swing.*;
 public class cBorrowPanel {
     private BorrowPanel view;
     private boolean online;
-    private static OrderView orderView;
+    public static final int MAX_VIEWERS_COUNT = 6;
+    private static int openedOrderViewers = 0;
 
     public cBorrowPanel(BorrowPanel view, boolean online) {
         this.view = view;
@@ -24,11 +25,33 @@ public class cBorrowPanel {
                 int code = Integer.parseInt(view.jList.getSelectedValue().toString());
 
                 for (int i = 0; i < iOrder.length; i++)
-                    if (code == iOrder[i].getCustomer().getAddress().getZipCode())
-                        orderView = new OrderView(true, iOrder[i].getCustomer(), -1);
+                    if (code == iOrder[i].getCustomer().getAddress().getZipCode()) {
+                        if (openedOrderViewers >= MAX_VIEWERS_COUNT) {
+                            JOptionPane.showMessageDialog(view,
+                                    "Невозможно создать более "+MAX_VIEWERS_COUNT+
+                                            " окон(-а) этого типа.",
+                                    "Ограничение",
+                                    JOptionPane.ERROR_MESSAGE
+                            );
+                            return;
+                        }
+                        new OrderView(true, iOrder[i].getCustomer(), -1);
+                        openedOrderViewers++;
+                        break;
+                    }
             } else {
                 int table = Integer.parseInt(view.jList.getSelectedValue().toString().split("№")[1]);
-                orderView = new OrderView(false, cOrder.getTableOrdersManager().getOrder(table).getCustomer(), table);
+                if (openedOrderViewers >= MAX_VIEWERS_COUNT) {
+                    JOptionPane.showMessageDialog(view,
+                            "Невозможно создать более "+MAX_VIEWERS_COUNT+
+                                    " окон(-а) этого типа.",
+                            "Ограничение",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    return;
+                }
+                new OrderView(false, cOrder.getTableOrdersManager().getOrder(table).getCustomer(), table);
+                openedOrderViewers++;
             }
         });
 
@@ -42,8 +65,7 @@ public class cBorrowPanel {
                     return;
                 }
                 cOrder.getInternetOrdersManager().removeOrder();
-            }
-            else {
+            } else {
                 int table = Integer.parseInt(view.jList.getSelectedValue().toString().split("№")[1]);
                 cOrder.getTableOrdersManager().remove(table);
             }
@@ -64,6 +86,13 @@ public class cBorrowPanel {
             );
         });
 
+    }
+
+    public static void disposeListener() {
+        if (openedOrderViewers > 0)
+            openedOrderViewers--;
+        else
+            System.exit(1);
     }
 
     public void updateOrdersList() {

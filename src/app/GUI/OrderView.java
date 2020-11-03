@@ -1,6 +1,7 @@
 package app.GUI;
 
 import app.Classes.Customer;
+import app.Controller.cBorrowPanel;
 import app.Controller.cOrderView;
 
 import javax.swing.*;
@@ -41,5 +42,10 @@ public class OrderView extends JFrame {
 
     public OrderView() {
         this(true, Customer.MATURE_UNKNOWN_CUSTOMER, -1);
+    }
+
+    public void dispose() {
+        cBorrowPanel.disposeListener();
+        super.dispose();
     }
 }
